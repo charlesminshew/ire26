@@ -1,21 +1,20 @@
 # IRE 2026 — Charles Minshew
 
-Materials for four sessions at IRE 2026, presented by Charles Minshew, Senior Editor of Data Journalism at The Atlanta Journal-Constitution.
-
 ## Sessions
 
-| # | Time | Title | Room |
-|---|------|-------|------|
-| 1 | Fri 2:45 PM · 1h | [Coaching AI tools for investigative reporting](01-coaching-ai/) | Maryland 3-4 |
-| 2 | Sat 10:15 AM · 1h | [Your AI research assistant: a live demo](02-ai-research-assistant/) | Maryland 1-2 |
-| 3 | Sat 2:30 PM · 3h 30min | [Master the power of mapping with QGIS](03-qgis-mapping/) (w/ Jennifer LaFleur) | Maryland 5-6 |
-| 4 | Sun 10:15 AM · 1h | [Turning documents into data with AI](04-documents-to-data/) | Maryland 1-2 |
-
-## Before you arrive
-
-- Sessions 1 and 4: bring a laptop (no tablets) with a free [ChatGPT](https://chat.openai.com) or [Claude](https://claude.ai) account.
-- Session 3: requires pre-registration; install **QGIS 3.44.10 Solothurn LTR** ([download](https://qgis.org/en/site/forusers/download.html)) before the session.
+| Session | When | Room | Materials | Links |
+|---------|------|------|-----------|-------|
+| 🪄 Coaching AI Tools for Investigative Reporting | Friday, 2:45 p.m. | Maryland 3-4 | [Tipsheet & materials](01-coaching-ai/) | |
+| 🤖 Your AI Research Assistant: A Live Demo | Saturday, 10:15 a.m. | Maryland 1-2 | [Tipsheet & materials](02-ai-research-assistant/) | |
+| 🗺️ Master the Power of Mapping with QGIS | Saturday, 2:30 p.m. | Maryland 5-6 | [Tipsheet & materials](03-qgis-mapping/) | |
+| 📄 Turning Documents into Data with AI | Sunday, 10:15 a.m. | Maryland 1-2 | [Tipsheet & materials](04-documents-to-data/) | |
 
 ## About
 
-Charles Minshew is Senior Editor of Data Journalism at The Atlanta Journal-Constitution.
+I'm a senior editor for data journalism at **The Atlanta Journal-Constitution**, where I lead the newsroom's data team. I build internal tools, manage data infrastructure, and support investigative reporting with data.
+
+Reach me at [charles.minshew@ajc.com](mailto:charles.minshew@ajc.com) or find me at the conference.
+
+## License
+
+These materials are shared under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Use them, share them, adapt them — just give credit.
