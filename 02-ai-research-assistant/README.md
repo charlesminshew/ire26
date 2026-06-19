@@ -12,7 +12,7 @@ AI tools like ChatGPT and Claude can do a lot more than write emails and summari
 - Cleaning and standardizing inconsistent names or addresses
 - Building a quick local app to browse and search your documents
 
-**No slides, no theory.** It's a fast-paced walkthrough of real investigative tasks, with time for "can it do this?" questions from the audience.
+Come for a fast-paced walkthrough of real investigative tasks, with time for "can it do this?" questions you have.
 
 ## What to bring
 
