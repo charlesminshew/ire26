@@ -4,7 +4,7 @@
 
 | Session | When | Room | Materials | Links |
 |---------|------|------|-----------|-------|
-| 🪄 Coaching AI Tools for Investigative Reporting | Friday, 2:45 p.m. | Maryland 3-4 | [Tipsheet & materials](01-coaching-ai/) | |
+| 🪄 Coaching AI Tools for Investigative Reporting | Friday, 2:45 p.m. | Maryland 3 | [Tipsheet & materials](01-coaching-ai/) | [Slides](01-coaching-ai/slides/index.html) |
 | 🤖 Your AI Research Assistant: A Live Demo | Saturday, 10:15 a.m. | Maryland 1-2 | [Tipsheet & materials](02-ai-research-assistant/) | |
 | 🗺️ Master the Power of Mapping with QGIS | Saturday, 2:30 p.m. | Maryland 5-6 | [Tipsheet & materials](03-qgis-mapping/) | |
 | 📄 Turning Documents into Data with AI | Sunday, 10:15 a.m. | Maryland 1-2 | [Tipsheet & materials](04-documents-to-data/) | |
