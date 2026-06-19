@@ -93,11 +93,10 @@
     font-size: 27px;
     line-height: 1.5;
     margin: 14px 0;
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
+    padding-left: 52px;
+    position: relative;
   }
-  li .check { flex-shrink: 0; }
+  li .check { position: absolute; left: 0; top: 0; }
   .sub { font-size: 22px; color: #555; margin-left: 38px; }
 
   .meta {
@@ -180,8 +179,19 @@
 <body>
 <div class="deck">
 
+  <!-- 0 PRE-TITLE -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div><div class="bar c"></div></div>
+    <div class="body big-center">
+      <p style="font-size:28px;font-weight:600;margin-bottom:16px;">All sessions, slides &amp; materials:</p>
+      <div class="url" style="font-size:90px;line-height:1.1;">bit.ly/ire-ai-2026</div>
+      <p style="font-size:22px;color:#666;margin-top:28px;">Open this now and you'll have everything.</p>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+  </section>
+
   <!-- 1 TITLE -->
-  <section class="slide active">
+  <section class="slide">
     <div class="chrome top"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div><div class="bar c"></div></div>
     <div class="body">
       <h1>Coaching AI tools<br>for investigative<br>reporting</h1>
@@ -287,6 +297,31 @@
       <p class="small" style="margin-top:24px;">Rule of thumb: AI is great at <strong>structure and language</strong>, risky on <strong>facts</strong>. Verify everything you'd verify from a source.</p>
     </div>
     <div class="chrome bottom"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 7.5 WARM-UP: CRAFTING PROMPTS -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="body top-aligned">
+      <h2>First, let's warm up</h2>
+      <p class="small" style="margin:-12px 0 18px;">One of the first things we started doing three years ago — clear, direct prompts. <strong>Pick one and try it now.</strong></p>
+      <ul>
+        <li><span class="check">🎵</span> Imagine Taylor Swift wrote a song about data journalism (to the tune of "Enchanted").</li>
+        <li><span class="check">🛣️</span> Write three tips for data journalists in the style of a witty highway sign.</li>
+        <li><span class="check">📝</span> Write a haiku about filing an open records request.</li>
+      </ul>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 7.6 UNTANGLED PAYOFF -->
+  <section class="slide" style="background:var(--cream-dark);">
+    <div class="chrome top"><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="dot"></div></div>
+    <div class="body big-center">
+      <h2 style="margin-bottom:30px;">Untangled <span style="font-size:28px;font-weight:600;">(to the tune of "Enchanted")</span></h2>
+      <p class="lyric" style="font-size:32px;line-height:1.7;">🎵 There I was again tonight<br>With a dataset I can't define<br>Rows and rows of messy names<br>A puzzle built from broken claims</p>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div><div class="bar c"></div></div>
   </section>
 
   <!-- 8 FOIA be specific -->
@@ -438,9 +473,9 @@
 <div class="hint">← → arrows to navigate · F for fullscreen</div>
 
 <script>
-  // Inject persistent session URL into every slide except the final one
+  // Inject persistent session URL into every slide except the first (pre-title) and last (questions)
   const allSlides = Array.from(document.querySelectorAll('.slide'));
-  allSlides.slice(0, -1).forEach(s => {
+  allSlides.slice(1, -1).forEach(s => {
     const el = document.createElement('div');
     el.className = 'session-url';
     el.textContent = 'bit.ly/ire-ai-2026';
@@ -450,6 +485,7 @@
   const slides = allSlides;
   let i = 0;
   document.getElementById('total').textContent = slides.length;
+  slides[0].classList.add('active');
 
   // Scale the 1280x720 design canvas to fill the viewport (leaving a small margin)
   function fit() {
