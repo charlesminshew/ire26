@@ -21,5 +21,6 @@ Come for a fast-paced walkthrough of real investigative tasks, with time for "ca
 
 ## Materials
 
+- [demo-agenda.md](demo-agenda.md) — the run-of-show: what I demo, what you try, and the sample files
 - [demo-tasks.md](demo-tasks.md) — the five demo tasks with copy-paste prompts you can take home and adapt
 - [case-study-cobb-ballots.md](case-study-cobb-ballots.md) — a real "AI-in-the-loop" project: extracting structured data from 162,847 scanned ballot images with OCR, regex, and browser-based review tools
