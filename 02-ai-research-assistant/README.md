@@ -2,15 +2,17 @@
 
 **Saturday 10:15 AM · 1 hour · Maryland 1-2**
 
-A live demonstration of using AI as a research assistant on real investigative tasks: backgrounding people and companies, finding obscure documents, tracing corporate structures, and synthesizing what you find.
+Charles Minshew, Senior Editor of Data Journalism at The Atlanta Journal-Constitution
 
-## What you'll see
+AI tools like ChatGPT and Claude can do a lot more than write emails and summarize articles. In this live demo, we'll put them to work on the kinds of tasks that eat up your reporting time:
 
-- Backgrounding a person or company from scratch
-- Using AI to find and summarize public filings
-- Tracing corporate ownership and registered-agent networks
-- Turning a pile of documents into a structured timeline
-- Writing and refining a source memo
+- Pulling data off a web page without writing a scraper
+- Turning a messy PDF into a structured spreadsheet
+- Comparing two versions of a bill or contract to find what changed
+- Cleaning and standardizing inconsistent names or addresses
+- Building a quick local app to browse and search your documents
+
+**No slides, no theory.** It's a fast-paced walkthrough of real investigative tasks, with time for "can it do this?" questions from the audience.
 
 ## What to bring
 
@@ -19,4 +21,4 @@ A live demonstration of using AI as a research assistant on real investigative t
 
 ## Materials
 
-- [demo-tasks.md](demo-tasks.md) — the five demo tasks with copy-paste prompts
+- [demo-tasks.md](demo-tasks.md) — the five demo tasks with copy-paste prompts you can take home and adapt
