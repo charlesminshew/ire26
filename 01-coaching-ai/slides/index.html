@@ -155,6 +155,17 @@
   .link { color: var(--link); font-weight: 600; word-break: break-all; }
   .url { font-family:'Playfair Display',serif; font-weight:800; color: var(--blue); font-size: 30px; }
 
+  .session-url {
+    position: absolute;
+    bottom: 44px;
+    right: 72px;
+    font-size: 16px;
+    color: var(--blue);
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    opacity: 0.75;
+  }
+
   /* progress + nav */
   .pageno {
     position: fixed; bottom: 14px; right: 20px;
@@ -413,8 +424,8 @@
     <div class="body">
       <h1>Questions?</h1>
       <div style="margin-top:40px;font-size:24px;line-height:1.8;">
-        <div>Get the tipsheet &amp; prompts:</div>
-        <div class="url" style="font-size:26px;">github.com/charlesminshew/ire26</div>
+        <div>All sessions, slides &amp; materials:</div>
+        <div class="url" style="font-size:38px;">bit.ly/ire-ai-2026</div>
         <div style="margin-top:20px;">Charles Minshew · <span class="link">charles.minshew@ajc.com</span></div>
       </div>
     </div>
@@ -427,7 +438,16 @@
 <div class="hint">← → arrows to navigate · F for fullscreen</div>
 
 <script>
-  const slides = Array.from(document.querySelectorAll('.slide'));
+  // Inject persistent session URL into every slide except the final one
+  const allSlides = Array.from(document.querySelectorAll('.slide'));
+  allSlides.slice(0, -1).forEach(s => {
+    const el = document.createElement('div');
+    el.className = 'session-url';
+    el.textContent = 'bit.ly/ire-ai-2026';
+    s.appendChild(el);
+  });
+
+  const slides = allSlides;
   let i = 0;
   document.getElementById('total').textContent = slides.length;
 
