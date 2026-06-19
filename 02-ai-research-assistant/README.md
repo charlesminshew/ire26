@@ -22,3 +22,4 @@ AI tools like ChatGPT and Claude can do a lot more than write emails and summari
 ## Materials
 
 - [demo-tasks.md](demo-tasks.md) — the five demo tasks with copy-paste prompts you can take home and adapt
+- [case-study-cobb-ballots.md](case-study-cobb-ballots.md) — a real "AI-in-the-loop" project: extracting structured data from 162,847 scanned ballot images with OCR, regex, and browser-based review tools
