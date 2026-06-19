@@ -35,8 +35,8 @@
   }
   .slide {
     display: none;
-    width: min(92vw, 1180px);
-    height: min(88vh, 700px);
+    width: 1280px;
+    height: 720px;
     background: var(--cream);
     border-radius: 22px;
     border: 3px solid var(--ink);
@@ -44,6 +44,8 @@
     padding: 64px 72px;
     flex-direction: column;
     box-shadow: 0 18px 50px rgba(0,0,0,0.18);
+    transform: scale(var(--scale, 1));
+    transform-origin: center center;
   }
   .slide.active { display: flex; }
 
@@ -427,6 +429,15 @@
   const slides = Array.from(document.querySelectorAll('.slide'));
   let i = 0;
   document.getElementById('total').textContent = slides.length;
+
+  // Scale the 1280x720 design canvas to fill the viewport (leaving a small margin)
+  function fit() {
+    const margin = 0.97;
+    const s = Math.min((window.innerWidth * margin) / 1280, (window.innerHeight * margin) / 720);
+    document.documentElement.style.setProperty('--scale', s);
+  }
+  window.addEventListener('resize', fit);
+  fit();
   function show(n) {
     i = Math.max(0, Math.min(slides.length - 1, n));
     slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
