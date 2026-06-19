@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coaching AI Tools for Investigative Reporting — IRE 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F6F2E5;
+    --cream-dark: #EAE3D2;
+    --ink: #1A1A1A;
+    --blue: #3B6FD4;
+    --yellow: #E9B73B;
+    --coral: #D96A4A;
+    --green: #6FA03B;
+    --link: #3B6FD4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    height: 100%;
+    background: var(--cream-dark);
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    color: var(--ink);
+    overflow: hidden;
+  }
+  .deck {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slide {
+    display: none;
+    width: min(92vw, 1180px);
+    height: min(88vh, 700px);
+    background: var(--cream);
+    border-radius: 22px;
+    border: 3px solid var(--ink);
+    position: relative;
+    padding: 64px 72px;
+    flex-direction: column;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.18);
+  }
+  .slide.active { display: flex; }
+
+  /* Window chrome bars top & bottom */
+  .chrome {
+    position: absolute;
+    left: 36px; right: 36px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .chrome.top { top: 26px; }
+  .chrome.bottom { bottom: 26px; }
+  .bar {
+    height: 14px;
+    border: 2px solid var(--ink);
+    border-radius: 20px;
+    background: var(--cream);
+  }
+  .bar.a { width: 120px; } .bar.b { flex: 1; } .bar.c { width: 200px; }
+  .dot { width: 30px; height: 14px; border: 2px solid var(--ink); border-radius: 20px; }
+  .dot.blue { background: var(--blue); }
+  .dot.yellow { background: var(--yellow); }
+  .dot.coral { background: var(--coral); }
+
+  h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 1.05;
+    letter-spacing: -1px;
+  }
+  h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 800;
+    font-size: 46px;
+    margin-bottom: 28px;
+    letter-spacing: -0.5px;
+  }
+  .body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .top-aligned { justify-content: flex-start; padding-top: 8px; }
+
+  ul { list-style: none; }
+  li {
+    font-size: 27px;
+    line-height: 1.5;
+    margin: 14px 0;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  li .check { flex-shrink: 0; }
+  .sub { font-size: 22px; color: #555; margin-left: 38px; }
+
+  .meta {
+    position: absolute;
+    bottom: 70px; right: 72px;
+    text-align: right;
+    font-size: 22px;
+    line-height: 1.4;
+  }
+  .slash { position: absolute; bottom: 64px; left: 72px; font-size: 50px; font-weight: 700; color: var(--ink); font-family:'Playfair Display',serif; }
+
+  .grid3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 30px;
+    align-items: start;
+    text-align: center;
+  }
+  .grid3 .cell {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 28px;
+    line-height: 1.2;
+  }
+  .pillhead {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .circle { width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0; }
+  .circle.green { background: var(--green); }
+  .circle.red { background: var(--coral); }
+
+  .agenda-table { width: 100%; border-collapse: collapse; font-size: 19px; }
+  .agenda-table td { padding: 9px 12px; border-bottom: 1px solid var(--cream-dark); vertical-align: top; }
+  .agenda-table .t { font-weight: 700; white-space: nowrap; width: 110px; color: var(--coral); }
+  .agenda-table .b { font-weight: 700; width: 200px; }
+
+  .prompt {
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    padding: 20px 24px;
+    font-size: 22px;
+    line-height: 1.45;
+    margin: 14px 0;
+  }
+  .prompt .label { font-weight: 700; font-size: 17px; text-transform: uppercase; letter-spacing: 1px; color: var(--coral); display:block; margin-bottom: 8px; }
+  .tag { font-family:'Playfair Display',serif; font-weight:800; font-size: 22px; margin: 18px 0 6px; }
+  .tag.blue { color: var(--blue); }
+
+  .big-center { text-align: center; }
+  .big-center .lyric { font-size: 30px; line-height: 1.6; }
+  .link { color: var(--link); font-weight: 600; word-break: break-all; }
+  .url { font-family:'Playfair Display',serif; font-weight:800; color: var(--blue); font-size: 30px; }
+
+  /* progress + nav */
+  .pageno {
+    position: fixed; bottom: 14px; right: 20px;
+    font-size: 14px; color: #6b6453; z-index: 10;
+  }
+  .hint { position: fixed; bottom: 14px; left: 20px; font-size: 13px; color:#9b9482; z-index:10; }
+  .fill { flex:1; }
+  .lead { font-size: 26px; line-height: 1.5; }
+  .small { font-size: 20px; color:#555; }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- 1 TITLE -->
+  <section class="slide active">
+    <div class="chrome top"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div><div class="bar c"></div></div>
+    <div class="body">
+      <h1>Coaching AI tools<br>for investigative<br>reporting</h1>
+      <div style="display:flex;gap:12px;margin-top:34px;">
+        <div style="width:230px;height:34px;background:var(--coral);border-radius:20px;"></div>
+        <div style="width:90px;height:34px;background:var(--yellow);border-radius:20px;align-self:flex-end;"></div>
+      </div>
+    </div>
+    <div class="slash">//</div>
+    <div class="meta">Charles Minshew<br>The Atlanta Journal-Constitution</div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+  </section>
+
+  <!-- 2 WHAT WE'LL DO -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div></div>
+    <div class="body top-aligned">
+      <h2>What we'll do today</h2>
+      <ul>
+        <li><span class="check">✅</span> Draft a targeted FOIA request — and iterate</li>
+        <li><span class="check">✅</span> Make sense of an unfamiliar dataset with AI</li>
+        <li><span class="check">✅</span> Build a reporting plan from that data</li>
+        <li><span class="check">✅</span> Get help with Excel tasks — no code required</li>
+        <li><span class="check">✅</span> Debug a script when something breaks</li>
+      </ul>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 3 WHAT YOU'LL NEED -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div></div>
+    <div class="body top-aligned">
+      <h2>What you'll need</h2>
+      <ul>
+        <li><span class="check">✅</span> A free ChatGPT <em>or</em> Claude account</li>
+        <li><span class="check">✅</span> A laptop (preferably no tablets)</li>
+        <li><span class="check">✅</span> An interest in data and open records</li>
+        <li><span class="check">✅</span> The willingness to argue with a generative AI service</li>
+      </ul>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 4 DO USE -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="body">
+      <div class="pillhead"><div class="circle green"></div><h2 style="margin:0;">Do use AI for…</h2></div>
+      <div class="grid3">
+        <div class="cell">Writing &amp; debugging code</div>
+        <div class="cell">Understanding unfamiliar data</div>
+        <div class="cell">Internal documentation</div>
+        <div class="cell">Drafting public records requests</div>
+        <div class="cell">Taking better notes for yourself</div>
+        <div class="cell">A super-powered search engine</div>
+      </div>
+    </div>
+    <div class="slash">//</div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 5 DON'T USE -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="body">
+      <div class="pillhead"><div class="circle red"></div><h2 style="margin:0;">Don't use AI for…</h2></div>
+      <div class="grid3">
+        <div class="cell">Final data analysis work</div>
+        <div class="cell">Handling sensitive personal data</div>
+        <div class="cell">Replacing the work of teammates</div>
+        <div class="cell">Processing entire datasets</div>
+        <div class="cell">Writing stories for the public</div>
+        <div class="cell">Making editorial decisions</div>
+      </div>
+    </div>
+    <div class="slash">//</div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 6 IMPORTANT -->
+  <section class="slide" style="background:var(--cream-dark);">
+    <div class="chrome top"><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="dot"></div></div>
+    <div class="body big-center">
+      <p class="lead" style="font-size:34px;line-height:1.4;">These guidelines are just <u>suggestions</u>. Consult with your bosses or attorney for more specific recommendations.</p>
+      <h2 style="margin-top:50px;">This is very important!</h2>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div><div class="bar c"></div></div>
+  </section>
+
+  <!-- 7 WHERE AI LIES -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div></div>
+    <div class="body top-aligned">
+      <h2>Where AI will confidently lie to you</h2>
+      <ul>
+        <li>⚠️ Made-up citations, case numbers and statutes</li>
+        <li>⚠️ Specific facts, dates and figures it never actually had</li>
+        <li>⚠️ "Yes, I checked" — when it checked nothing</li>
+        <li>⚠️ Math and totals on data you pasted in</li>
+      </ul>
+      <p class="small" style="margin-top:24px;">Rule of thumb: AI is great at <strong>structure and language</strong>, risky on <strong>facts</strong>. Verify everything you'd verify from a source.</p>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 8 FOIA be specific -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="body top-aligned">
+      <h2>FOIA: start specific</h2>
+      <div class="tag blue">◆ Be specific</div>
+      <div class="prompt">Write a records request for elevator inspection reports at 10 S West St, Indianapolis, IN.</div>
+      <div class="tag blue">◆ Be more specific</div>
+      <div class="prompt">You're a reporter and you need information about elevator inspections at the JW Marriott at 10 S West St, Indianapolis, IN. Write a records request seeking reports from the Indiana Department of Homeland Security.</div>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 9 FOIA iterate -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="body top-aligned">
+      <h2>FOIA: iterate toward the data</h2>
+      <div class="tag blue">◆ Iterate</div>
+      <div class="prompt">You're a reporter and you need to put your elevator reports from the JW Marriott into context. Write a records request to the Indiana Dept. of Homeland Security for inspection <em>data</em>.</div>
+      <div class="tag blue">◆ Iterate some more</div>
+      <div class="prompt">Write an open records request to the Indiana Dept. of Homeland Security for a state database of elevator inspection reports since January 1, 2020 — including all releasable fields.</div>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 10 IMPROV / your turn -->
+  <section class="slide" style="background:var(--cream-dark);">
+    <div class="chrome top"><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="dot"></div></div>
+    <div class="body big-center">
+      <h2 style="margin-bottom:24px;">Your turn — pick a beat</h2>
+      <div class="prompt" style="text-align:left;max-width:760px;margin:0 auto;">I'm a reporter covering <strong>[housing / schools / police / courts]</strong>. Write a public records request to <strong>[agency]</strong> seeking <strong>data</strong> about <strong>[issue]</strong>. Ask for an export with all releasable fields, then list the fields I should request.</div>
+      <p class="small" style="margin-top:22px;">Stuck? Try: building inspections · overtime pay · school discipline · 911 response times</p>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div><div class="bar c"></div></div>
+  </section>
+
+  <!-- 11 LETS LOOK AT DATA -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="body top-aligned">
+      <h2>Let's look at some data</h2>
+      <p class="lead" style="font-weight:700;">Prince George's County permits (2013–present)</p>
+      <p class="url" style="margin:14px 0 30px;">bit.ly/ire26-pg-permits</p>
+      <div class="grid3" style="text-align:left;">
+        <div class="cell" style="font-size:24px;color:var(--blue);">◆ Write a data dictionary</div>
+        <div class="cell" style="font-size:24px;color:var(--blue);">◆ Explain the scope of the data</div>
+        <div class="cell" style="font-size:24px;color:var(--blue);">◆ Explore story questions</div>
+      </div>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 12 DATA DICTIONARY + SCOPE -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="body top-aligned">
+      <h2>Understand the data</h2>
+      <div class="tag blue">◆ Data dictionary</div>
+      <div class="prompt">Here are the column names from a Prince George's County residential &amp; commercial permits dataset. Write a plain-English data dictionary. [paste fields]</div>
+      <div class="tag blue">◆ Scope &amp; limits</div>
+      <div class="prompt">Based on these fields, what does this dataset actually capture — and what does it miss? What should a journalist know before relying on it?</div>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 13 REPORTING PLAN -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="body top-aligned">
+      <h2>Build a reporting plan</h2>
+      <div class="prompt">
+        <span class="label">Prompt</span>
+        What are five investigative story ideas this permit data could support? For each one, list the key questions to answer and the specific analysis steps to get there.
+      </div>
+      <div class="prompt">
+        <span class="label">Push back</span>
+        Which of these is most realistic with only the fields we have? What additional records or data would I need to FOIA to finish the strongest story?
+      </div>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 14 EXCEL -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="body top-aligned">
+      <h2>Excel without writing code</h2>
+      <div class="prompt">
+        <span class="label">Ask for the formula</span>
+        I'm in Excel. Column C has permit issue dates and column F has permit type. Write a formula that counts how many "Residential" permits were issued in 2024. Then explain each part in one sentence.
+      </div>
+      <div class="prompt">
+        <span class="label">When it breaks</span>
+        That formula returns #VALUE!. Here's exactly what I typed: [paste]. What's wrong and what's the minimal fix?
+      </div>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 15 DEBUGGING -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="body top-aligned">
+      <h2>When a colleague's script breaks</h2>
+      <p class="small" style="margin-bottom:18px;">You don't have to write code to get unstuck.</p>
+      <div class="prompt">
+        <span class="label">The debugging pattern</span>
+        Here's a script a colleague wrote: [paste code]. Here's the error: [paste error]. Don't rewrite the whole thing. Tell me: (1) what's causing the error, (2) the minimal change to fix it, (3) anything else obviously wrong.
+      </div>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 16 TAKEAWAYS -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div></div>
+    <div class="body top-aligned">
+      <h2>Three things to try Monday</h2>
+      <ul>
+        <li><span class="check">1️⃣</span> Draft your next records request with AI — then iterate it toward <em>data</em>, not just documents.</li>
+        <li><span class="check">2️⃣</span> Paste an unfamiliar dataset's columns in and ask for a data dictionary + scope.</li>
+        <li><span class="check">3️⃣</span> Next time a formula or script breaks, paste the error and ask for the minimal fix.</li>
+      </ul>
+      <p class="small" style="margin-top:20px;">Always verify facts. AI is your intern, not your editor.</p>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 17 QUESTIONS -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div><div class="bar c"></div></div>
+    <div class="body">
+      <h1>Questions?</h1>
+      <div style="margin-top:40px;font-size:24px;line-height:1.8;">
+        <div>Get the tipsheet &amp; prompts:</div>
+        <div class="url" style="font-size:26px;">github.com/charlesminshew/ire26</div>
+        <div style="margin-top:20px;">Charles Minshew · <span class="link">charles.minshew@ajc.com</span></div>
+      </div>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+  </section>
+
+</div>
+
+<div class="pageno"><span id="cur">1</span> / <span id="total">17</span></div>
+<div class="hint">← → arrows to navigate · F for fullscreen</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  let i = 0;
+  document.getElementById('total').textContent = slides.length;
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+    document.getElementById('cur').textContent = i + 1;
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { show(i + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { show(i - 1); e.preventDefault(); }
+    else if (e.key === 'Home') show(0);
+    else if (e.key === 'End') show(slides.length - 1);
+    else if (e.key.toLowerCase() === 'f') {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+  // click right half = next, left half = prev
+  document.addEventListener('click', e => {
+    if (e.clientX > window.innerWidth / 2) show(i + 1); else show(i - 1);
+  });
+  show(0);
+</script>
+</body>
+</html>
