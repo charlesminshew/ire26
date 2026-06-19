@@ -1,76 +1,108 @@
 # Demo Tasks — AI Research Assistant
 
-Five tasks demonstrated live. Prompts are copy-paste ready.
+Five real investigative tasks demonstrated live. Prompts are copy-paste ready — adapt the bracketed parts to your own work.
+
+> **Reminder:** AI is great at structure and transformation, risky on facts. Spot-check anything it extracts against the source before you publish.
 
 ---
 
-## Task 1: Background a person
+## Task 1: Pull data off a web page — no scraper required
+
+Paste the page's HTML or a screenshot, or give the URL to a tool that can browse.
 
 ```
-I am a journalist backgrounding [full name], who is [title/role] at [organization] in [city, state].
+Here is a web page listing [what it lists, e.g. restaurant inspection results].
 
-Give me a research plan: what public records, databases, and sources I should check, in priority order. For each source, tell me what I might find and what the likely obstacles are.
+Extract every record into a table with these columns: [list columns].
 
-Do not make up any facts about this person. Only suggest research paths.
+Rules:
+- One row per record.
+- If a value is missing on the page, leave the cell blank — do not guess.
+- Return the result as CSV so I can paste it into a spreadsheet.
 ```
 
----
-
-## Task 2: Background a company
+Follow-up when the page is paginated or messy:
 
 ```
-I am investigating [company name], a [type of company] based in [state].
-
-Give me a step-by-step plan to research this company using only public records. Include:
-- Secretary of state / corporate registration
-- Beneficial ownership / registered agent
-- Litigation history
-- Federal contracts and grants (if applicable)
-- Regulatory filings
-- News archive
-
-Flag which steps are most likely to surface useful leads for an investigative story.
+That's only the first 20 records. Here is the next page's content — append those rows in the same format.
 ```
 
 ---
 
-## Task 3: Trace a corporate structure
+## Task 2: Turn a messy PDF into a structured spreadsheet
+
+Upload the PDF (or paste the text).
 
 ```
-I have the following information about a company and its apparent owners. Help me map the corporate structure and identify what I still need to find out.
+This PDF is a [type of document, e.g. campaign finance report].
 
-[Paste what you know: company names, states of incorporation, names of officers/owners, any document excerpts]
+Extract the data into a table with these columns: [list columns].
 
-Output a plain-text org chart showing ownership relationships. List each entity I should look up and where to look it up.
+Rules:
+- Do not infer or guess values that aren't in the document.
+- For dates use YYYY-MM-DD. For money, use plain numbers with no $ or commas.
+- If the document has multiple sections or pages, keep them all.
+- Return the result as CSV.
+```
+
+Then validate:
+
+```
+List any rows where a value looked ambiguous or hard to read, and tell me which page each came from so I can check the original.
 ```
 
 ---
 
-## Task 4: Build a timeline from documents
+## Task 3: Compare two versions of a bill or contract
+
+Paste both versions (or upload both files).
 
 ```
-I have the following excerpts from documents about [topic]. Build a chronological timeline of events. For each entry include: date, what happened, and which document it comes from.
+Here are two versions of [a bill / a contract]: VERSION A and VERSION B.
 
-If dates are missing or ambiguous, flag them. Do not infer dates that are not in the documents.
+Show me everything that changed from A to B:
+- Language that was added
+- Language that was removed
+- Language that was reworded (show before and after)
 
-[Paste document excerpts]
+Group the changes by section. Ignore formatting-only differences. Flag any change that meaningfully shifts who benefits, who pays, deadlines, or penalties.
 ```
 
 ---
 
-## Task 5: Write a source memo
+## Task 4: Clean and standardize messy names or addresses
+
+Paste the column of values.
 
 ```
-Based on the research below, write a one-page source memo I can use to brief my editor.
+Here is a list of [company names / addresses] entered inconsistently by different people.
 
-Include:
-- What we know (with sourcing)
-- What we still need to confirm
-- The strongest potential story angles
-- Key people and entities involved
-- Recommended next steps
+Create a table with two columns: the original value, and a standardized version.
 
-Do not speculate beyond what the documents support. Flag every fact that needs additional verification.
+Standardize: capitalization, abbreviations (St/Street, Inc/Incorporated), and obvious spelling variants of the same entity.
 
-[Paste research notes / document excerpts]
+Do NOT merge two values unless you're confident they're the same entity. Flag any you're unsure about in a third column.
+```
+
+---
+
+## Task 5: Build a quick app to browse and search your documents
+
+Have a JSON or CSV file of records ready.
+
+```
+I have a [JSON/CSV] file of [what it contains].
+
+Write a single self-contained HTML file that loads this data and lets me:
+- See all records in a searchable, sortable table
+- Filter by [field]
+- Click a row to see the full record
+
+No build tools, no server, no external dependencies — it should run by just opening the file in a browser. Put the data loading at the top so I can swap in my own file.
+```
+
+Iterate:
+
+```
+Add a free-text search box that filters across all fields as I type, and a count of how many records match.
 ```
