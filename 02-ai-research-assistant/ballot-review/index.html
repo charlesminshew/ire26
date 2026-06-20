@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ballot Review: Montgomery runoff (Governor)</title>
+<style>
+  /* High-contrast, projector-friendly. Tuned for a big screen in a warm/yellow-lit room:
+     near-black background, bright white text, large hit targets, saturated non-yellow accents. */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0c0d10;
+    --panel: #16181e;
+    --panel2: #1e212a;
+    --line: #3a3f4b;
+    --text: #ffffff;
+    --muted: #b9c0cc;
+    --cyan: #2fd9ff;
+    --lime: #38e06a;
+    --pink: #ff5db1;
+  }
+  html, body { height: 100%; }
+  body {
+    font-family: -apple-system, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text);
+    height: 100vh; display: flex; flex-direction: column;
+  }
+  #toolbar {
+    background: var(--panel); border-bottom: 2px solid var(--line);
+    padding: 14px 22px; display: flex; align-items: center; gap: 26px; flex-shrink: 0;
+  }
+  #progress { font-size: 26px; font-weight: 800; }
+  #precinct { font-size: 22px; color: var(--lime); font-weight: 700; }
+  #filename { font-size: 20px; color: var(--cyan); font-weight: 600; flex: 1; }
+  #ocr-read { font-size: 20px; font-weight: 800; background: #3a1414; color: #ff8a8a;
+              padding: 6px 16px; border-radius: 999px; border: 2px solid #ff8a8a; white-space: nowrap; }
+
+  #main { display: flex; flex: 1; overflow: hidden; }
+  #image-pane { flex: 1; display: flex; align-items: flex-start; justify-content: center;
+                overflow: auto; background: #000; padding: 14px; }
+  #ballot-img { width: min(100%, 1100px); height: auto; background: #fff; border-radius: 4px; }
+
+  #side-panel { width: 470px; background: var(--panel); border-left: 2px solid var(--line);
+                display: flex; flex-direction: column; padding: 20px 18px; gap: 12px;
+                flex-shrink: 0; overflow-y: auto; }
+  #task-note { font-size: 18px; line-height: 1.4; color: var(--muted);
+               background: var(--panel2); border-radius: 10px; padding: 12px 14px; }
+  #task-note b { color: #fff; }
+  #side-panel h3 { font-size: 16px; color: var(--muted); text-transform: uppercase;
+                   letter-spacing: 2px; margin: 4px 2px 0; }
+
+  .vote-btn {
+    display: flex; align-items: center; gap: 16px;
+    padding: 18px 18px; border: 2px solid var(--line); background: var(--panel2);
+    color: var(--text); cursor: pointer; border-radius: 12px;
+    font-size: 26px; font-weight: 800; text-align: left; width: 100%;
+    transition: transform .04s ease;
+  }
+  .vote-btn:hover { background: #2a2e39; }
+  .vote-btn:active { transform: scale(.99); }
+  .vote-btn .key {
+    flex-shrink: 0; width: 48px; height: 48px; display: inline-flex;
+    align-items: center; justify-content: center; border-radius: 10px;
+    background: var(--cyan); color: #00121a; font-weight: 900; font-size: 26px;
+  }
+  .vote-btn.active { background: var(--lime); color: #06230f; border-color: #eafff0; }
+  .vote-btn.active .key { background: #06230f; color: var(--lime); }
+  .vote-btn.candA { border-color: var(--cyan); }
+  .vote-btn.candB { border-color: var(--pink); }
+  .vote-btn.candB .key { background: var(--pink); color: #2a0418; }
+
+  .secondary { font-size: 21px; padding: 13px 16px; }
+  .secondary .key { width: 40px; height: 40px; font-size: 21px; background: #6b7280; color: #fff; }
+
+  .other-row { display: flex; gap: 8px; }
+  #other-input { flex: 1; background: var(--panel2); border: 2px solid var(--line);
+                 color: #fff; padding: 12px; border-radius: 10px; font-size: 18px; }
+
+  hr.sep { border: none; border-top: 2px solid var(--line); margin: 6px 0; }
+  #nav { display: flex; gap: 12px; }
+  .nav-btn { flex: 1; padding: 14px; background: var(--panel2); border: 2px solid var(--line);
+             color: #fff; cursor: pointer; border-radius: 10px; font-size: 22px; font-weight: 700; }
+  .nav-btn:hover { background: #2a2e39; }
+  #save-btn { width: 100%; padding: 16px; background: #0f7a35; border: 2px solid var(--lime);
+              color: #fff; cursor: pointer; border-radius: 10px; font-size: 22px; font-weight: 800; }
+  #save-btn:hover { background: #129141; }
+  #reviewed-count { font-size: 20px; color: var(--muted); text-align: center; font-weight: 700; }
+  #hint { font-size: 15px; color: #7b8290; text-align: center; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div id="toolbar">
+  <span id="progress">0 / 0</span>
+  <span id="precinct"></span>
+  <span id="filename"></span>
+  <span id="ocr-read"></span>
+</div>
+<div id="main">
+  <div id="image-pane"><img id="ballot-img" src="" alt="ballot"></div>
+  <div id="side-panel">
+    <div id="task-note">The computer read 953 ballots and <b>skipped these 32</b>: emergency / provisional ballots with no machine summary page. Read each one and record the <b>Governor (Rep)</b> vote.</div>
+    <h3>Governor: Republican runoff</h3>
+    <button class="vote-btn candA" data-vote="Rick Jackson" onclick="setVote('Rick Jackson')"><span class="key">R</span> Rick Jackson</button>
+    <button class="vote-btn candB" data-vote="Burt Jones" onclick="setVote('Burt Jones')"><span class="key">J</span> Burt Jones</button>
+    <button class="vote-btn secondary" data-vote="BLANK / no Governor vote" onclick="setVote('BLANK / no Governor vote')"><span class="key">X</span> Blank / no vote</button>
+    <button class="vote-btn secondary" data-vote="Not a Republican ballot" onclick="setVote('Not a Republican ballot')"><span class="key">N</span> Not a Republican ballot</button>
+    <button class="vote-btn secondary" data-vote="[can't read]" onclick="setVote('[can't read]')"><span class="key">U</span> Can't read / damaged</button>
+    <div class="other-row">
+      <input id="other-input" type="text" placeholder="Other / write-in…">
+      <button class="nav-btn" style="flex:0 0 auto;padding:12px 18px;" onclick="setVote(document.getElementById('other-input').value)">✓</button>
+    </div>
+    <hr class="sep">
+    <div id="nav">
+      <button class="nav-btn" onclick="navigate(-1)">← Prev</button>
+      <button class="nav-btn" onclick="navigate(1)">Next →</button>
+    </div>
+    <button id="save-btn" onclick="saveResults()">⬇ Save corrections (TSV)</button>
+    <div id="reviewed-count"></div>
+    <div id="hint">Press a letter to record a vote and auto-advance · ← → to move · scroll the ballot to find the Governor race · progress saves automatically</div>
+  </div>
+</div>
+
+<script>const BALLOTS = [{"img": "Pre_201-Mount Vernon-0091.png", "filename": "Pre_201-Mount Vernon-0091.tif", "precinct": "201-Mount Vernon", "ocr": "(no summary page)"}, {"img": "Pre_201-Mount Vernon-0092.png", "filename": "Pre_201-Mount Vernon-0092.tif", "precinct": "201-Mount Vernon", "ocr": "(no summary page)"}, {"img": "Pre_201-Mount Vernon-0093.png", "filename": "Pre_201-Mount Vernon-0093.tif", "precinct": "201-Mount Vernon", "ocr": "(no summary page)"}, {"img": "Pre_201-Mount Vernon-0094.png", "filename": "Pre_201-Mount Vernon-0094.tif", "precinct": "201-Mount Vernon", "ocr": "(no summary page)"}, {"img": "Pre_201-Mount Vernon-0095.png", "filename": "Pre_201-Mount Vernon-0095.tif", "precinct": "201-Mount Vernon", "ocr": "(no summary page)"}, {"img": "Pre_201-Mount Vernon-0096.png", "filename": "Pre_201-Mount Vernon-0096.tif", "precinct": "201-Mount Vernon", "ocr": "(no summary page)"}, {"img": "Pre_201-Mount Vernon-0097.png", "filename": "Pre_201-Mount Vernon-0097.tif", "precinct": "201-Mount Vernon", "ocr": "(no summary page)"}, {"img": "Pre_201-Mount Vernon-0098.png", "filename": "Pre_201-Mount Vernon-0098.tif", "precinct": "201-Mount Vernon", "ocr": "(no summary page)"}, {"img": "Pre_201-Mount Vernon-0099.png", "filename": "Pre_201-Mount Vernon-0099.tif", "precinct": "201-Mount Vernon", "ocr": "(no summary page)"}, {"img": "Pre_201-Mount Vernon-0100.png", "filename": "Pre_201-Mount Vernon-0100.tif", "precinct": "201-Mount Vernon", "ocr": "(no summary page)"}, {"img": "Pre_201-Mount Vernon-0101.png", "filename": "Pre_201-Mount Vernon-0101.tif", "precinct": "201-Mount Vernon", "ocr": "(no summary page)"}, {"img": "Pre_201-Mount Vernon-0102.png", "filename": "Pre_201-Mount Vernon-0102.tif", "precinct": "201-Mount Vernon", "ocr": "(no summary page)"}, {"img": "Pre_201-Mount Vernon-0103.png", "filename": "Pre_201-Mount Vernon-0103.tif", "precinct": "201-Mount Vernon", "ocr": "(no summary page)"}, {"img": "Pre_201-Mount Vernon-0104.png", "filename": "Pre_201-Mount Vernon-0104.tif", "precinct": "201-Mount Vernon", "ocr": "(no summary page)"}, {"img": "Pre_201-Mount Vernon-0105.png", "filename": "Pre_201-Mount Vernon-0105.tif", "precinct": "201-Mount Vernon", "ocr": "(no summary page)"}, {"img": "Pre_201-Mount Vernon-0106.png", "filename": "Pre_201-Mount Vernon-0106.tif", "precinct": "201-Mount Vernon", "ocr": "(no summary page)"}, {"img": "Pre_201-Mount Vernon-0107.png", "filename": "Pre_201-Mount Vernon-0107.tif", "precinct": "201-Mount Vernon", "ocr": "(no summary page)"}, {"img": "Pre_201-Mount Vernon-0108.png", "filename": "Pre_201-Mount Vernon-0108.tif", "precinct": "201-Mount Vernon", "ocr": "(no summary page)"}, {"img": "Pre_201-Mount Vernon-0109.png", "filename": "Pre_201-Mount Vernon-0109.tif", "precinct": "201-Mount Vernon", "ocr": "(no summary page)"}, {"img": "Pre_202-Uvalda-0061.png", "filename": "Pre_202-Uvalda-0061.tif", "precinct": "202-Uvalda", "ocr": "(no summary page)"}, {"img": "Pre_202-Uvalda-0062.png", "filename": "Pre_202-Uvalda-0062.tif", "precinct": "202-Uvalda", "ocr": "(no summary page)"}, {"img": "Pre_202-Uvalda-0063.png", "filename": "Pre_202-Uvalda-0063.tif", "precinct": "202-Uvalda", "ocr": "(no summary page)"}, {"img": "Pre_202-Uvalda-0064.png", "filename": "Pre_202-Uvalda-0064.tif", "precinct": "202-Uvalda", "ocr": "(no summary page)"}, {"img": "Pre_202-Uvalda-0065.png", "filename": "Pre_202-Uvalda-0065.tif", "precinct": "202-Uvalda", "ocr": "(no summary page)"}, {"img": "Pre_202-Uvalda-0066.png", "filename": "Pre_202-Uvalda-0066.tif", "precinct": "202-Uvalda", "ocr": "(no summary page)"}, {"img": "Pre_202-Uvalda-0067.png", "filename": "Pre_202-Uvalda-0067.tif", "precinct": "202-Uvalda", "ocr": "(no summary page)"}, {"img": "Pre_202-Uvalda-0068.png", "filename": "Pre_202-Uvalda-0068.tif", "precinct": "202-Uvalda", "ocr": "(no summary page)"}, {"img": "Pre_202-Uvalda-0069.png", "filename": "Pre_202-Uvalda-0069.tif", "precinct": "202-Uvalda", "ocr": "(no summary page)"}, {"img": "Pre_202-Uvalda-0070.png", "filename": "Pre_202-Uvalda-0070.tif", "precinct": "202-Uvalda", "ocr": "(no summary page)"}, {"img": "Pre_202-Uvalda-0071.png", "filename": "Pre_202-Uvalda-0071.tif", "precinct": "202-Uvalda", "ocr": "(no summary page)"}, {"img": "Pre_202-Uvalda-0072.png", "filename": "Pre_202-Uvalda-0072.tif", "precinct": "202-Uvalda", "ocr": "(no summary page)"}, {"img": "Pre_202-Uvalda-0073.png", "filename": "Pre_202-Uvalda-0073.tif", "precinct": "202-Uvalda", "ocr": "(no summary page)"}];</script>
+<script>
+let current = 0;
+const results = {};
+const STORE = 'montgomery_governor_review';
+
+const saved = localStorage.getItem(STORE);
+if (saved) { try { Object.assign(results, JSON.parse(saved)); } catch (e) {} }
+
+function render() {
+  const b = BALLOTS[current];
+  if (!b) return;
+  document.getElementById('progress').textContent = `${current + 1} / ${BALLOTS.length}`;
+  document.getElementById('filename').textContent = b.filename;
+  document.getElementById('precinct').textContent = b.precinct;
+  document.getElementById('ocr-read').textContent = `Computer: ${b.ocr}`;
+  document.getElementById('ballot-img').src = `images/${encodeURIComponent(b.img)}`;
+  document.getElementById('image-pane').scrollTop = 0;
+  document.querySelectorAll('.vote-btn').forEach(btn => {
+    btn.classList.toggle('active', results[b.filename] === btn.dataset.vote);
+  });
+  const n = Object.keys(results).filter(k => results[k]).length;
+  document.getElementById('reviewed-count').textContent = `${n} of ${BALLOTS.length} reviewed`;
+}
+function setVote(vote) {
+  if (!vote) return;
+  const b = BALLOTS[current];
+  results[b.filename] = vote;
+  localStorage.setItem(STORE, JSON.stringify(results));
+  document.getElementById('other-input').value = '';
+  navigate(1);
+}
+function navigate(dir) {
+  current = Math.max(0, Math.min(BALLOTS.length - 1, current + dir));
+  render();
+}
+function saveResults() {
+  const lines = ['filename\tprecinct\tcorrected_vote'];
+  for (const b of BALLOTS) {
+    if (results[b.filename]) lines.push(`${b.filename}\t${b.precinct}\t${results[b.filename]}`);
+  }
+  const blob = new Blob([lines.join('\n')], {type: 'text/tab-separated-values'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'montgomery_governor_corrected.tsv';
+  a.click();
+}
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') { if (e.key === 'Enter') setVote(e.target.value); return; }
+  switch (e.key.toLowerCase()) {
+    case 'r': setVote('Rick Jackson'); break;
+    case 'j': setVote('Burt Jones'); break;
+    case 'x': setVote('BLANK / no Governor vote'); break;
+    case 'n': setVote('Not a Republican ballot'); break;
+    case 'u': setVote("[can't read]"); break;
+    case 'arrowright': case 'arrowdown': navigate(1); break;
+    case 'arrowleft': case 'arrowup': navigate(-1); break;
+  }
+});
+render();
+</script>
+</body>
+</html>

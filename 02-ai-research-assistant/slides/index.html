@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your AI Research Assistant · IRE 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F6F2E5;
+    --cream-dark: #EAE3D2;
+    --ink: #1A1A1A;
+    --blue: #3B6FD4;
+    --yellow: #E9B73B;
+    --coral: #D96A4A;
+    --green: #6FA03B;
+    --link: #3B6FD4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    height: 100%;
+    background: var(--cream-dark);
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    color: var(--ink);
+    overflow: hidden;
+  }
+  .deck {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slide {
+    display: none;
+    width: 1280px;
+    height: 720px;
+    background: var(--cream);
+    border-radius: 22px;
+    border: 3px solid var(--ink);
+    position: relative;
+    padding: 64px 72px;
+    flex-direction: column;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.18);
+    transform: scale(var(--scale, 1));
+    transform-origin: center center;
+  }
+  .slide.active { display: flex; }
+
+  /* Window chrome bars top & bottom */
+  .chrome {
+    position: absolute;
+    left: 36px; right: 36px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .chrome.top { top: 26px; }
+  .chrome.bottom { bottom: 26px; }
+  .bar {
+    height: 14px;
+    border: 2px solid var(--ink);
+    border-radius: 20px;
+    background: var(--cream);
+  }
+  .bar.a { width: 120px; } .bar.b { flex: 1; } .bar.c { width: 200px; }
+  .dot { width: 30px; height: 14px; border: 2px solid var(--ink); border-radius: 20px; }
+  .dot.blue { background: var(--blue); }
+  .dot.yellow { background: var(--yellow); }
+  .dot.coral { background: var(--coral); }
+
+  h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 1.05;
+    letter-spacing: -1px;
+  }
+  h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 800;
+    font-size: 46px;
+    margin-bottom: 28px;
+    letter-spacing: -0.5px;
+  }
+  .body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .top-aligned { justify-content: flex-start; padding-top: 8px; }
+
+  ul { list-style: none; }
+  li {
+    font-size: 27px;
+    line-height: 1.5;
+    margin: 14px 0;
+    padding-left: 52px;
+    position: relative;
+  }
+  li .check { position: absolute; left: 0; top: 0; }
+  .sub { font-size: 22px; color: #555; margin-left: 38px; }
+
+  .meta {
+    position: absolute;
+    bottom: 70px; right: 72px;
+    text-align: right;
+    font-size: 22px;
+    line-height: 1.4;
+  }
+  .slash { position: absolute; bottom: 64px; left: 72px; font-size: 50px; font-weight: 700; color: var(--ink); font-family:'Playfair Display',serif; }
+
+  .grid3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 30px;
+    align-items: start;
+    text-align: center;
+  }
+  .grid3 .cell {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 28px;
+    line-height: 1.2;
+  }
+  .pillhead {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .circle { width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0; }
+  .circle.green { background: var(--green); }
+  .circle.red { background: var(--coral); }
+
+  .agenda-table { width: 100%; border-collapse: collapse; font-size: 21px; }
+  .agenda-table td { padding: 11px 12px; border-bottom: 1px solid var(--cream-dark); vertical-align: top; }
+  .agenda-table .t { font-weight: 700; white-space: nowrap; width: 70px; color: var(--coral); }
+  .agenda-table .b { font-weight: 700; width: 300px; }
+  .agenda-table .mode { font-weight: 700; white-space: nowrap; }
+  .mode.hands { color: var(--green); }
+  .mode.watch { color: var(--blue); }
+
+  .prompt {
+    background: #fff;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    padding: 20px 24px;
+    font-size: 22px;
+    line-height: 1.45;
+    margin: 14px 0;
+  }
+  .prompt.sm { font-size: 19px; padding: 16px 20px; }
+  .prompt .label { font-weight: 700; font-size: 17px; text-transform: uppercase; letter-spacing: 1px; color: var(--coral); display:block; margin-bottom: 8px; }
+  .tag { font-family:'Playfair Display',serif; font-weight:800; font-size: 22px; margin: 18px 0 6px; }
+  .tag.blue { color: var(--blue); }
+
+  .big-center { text-align: center; }
+  .big-center .lyric { font-size: 30px; line-height: 1.6; }
+  .link { color: var(--link); font-weight: 600; word-break: break-all; }
+  .url { font-family:'Playfair Display',serif; font-weight:800; color: var(--blue); font-size: 30px; }
+
+  .filechip {
+    display:inline-block;
+    background: var(--cream-dark);
+    border: 2px solid var(--ink);
+    border-radius: 8px;
+    padding: 3px 12px;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'Inter', monospace;
+    margin-top: 10px;
+  }
+  .notice { font-size: 20px; color:#555; margin-top: 16px; }
+  .notice strong { color: var(--coral); }
+
+  .session-url {
+    position: absolute;
+    bottom: 44px;
+    right: 72px;
+    font-size: 16px;
+    color: var(--blue);
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    opacity: 0.75;
+  }
+
+  /* progress + nav */
+  .pageno {
+    position: fixed; bottom: 14px; right: 20px;
+    font-size: 14px; color: #6b6453; z-index: 10;
+  }
+  .hint { position: fixed; bottom: 14px; left: 20px; font-size: 13px; color:#9b9482; z-index:10; }
+  .fill { flex:1; }
+  .lead { font-size: 26px; line-height: 1.5; }
+  .small { font-size: 20px; color:#555; }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- 0 PRE-TITLE -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div><div class="bar c"></div></div>
+    <div class="body big-center">
+      <p style="font-size:28px;font-weight:600;margin-bottom:16px;">All sessions, slides &amp; sample files:</p>
+      <div class="url" style="font-size:90px;line-height:1.1;">bit.ly/ire-ai-2026</div>
+      <p style="font-size:22px;color:#666;margin-top:28px;">Open this now. Grab the sample folder and you're ready.</p>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+  </section>
+
+  <!-- 1 TITLE -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div><div class="bar c"></div></div>
+    <div class="body">
+      <h1>Your AI<br>research<br>assistant</h1>
+      <p class="lead" style="margin-top:22px;color:#555;">A live demo. Real investigative tasks, no code required.</p>
+      <div style="display:flex;gap:12px;margin-top:26px;">
+        <div style="width:230px;height:34px;background:var(--coral);border-radius:20px;"></div>
+        <div style="width:90px;height:34px;background:var(--yellow);border-radius:20px;align-self:flex-end;"></div>
+      </div>
+    </div>
+    <div class="slash">//</div>
+    <div class="meta">Charles Minshew<br>The Atlanta Journal-Constitution</div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+  </section>
+
+  <!-- 2 WHAT WE'LL DO -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div></div>
+    <div class="body top-aligned">
+      <h2>Five tasks that eat your time</h2>
+      <p class="small" style="margin:-12px 0 18px;">AI does more than write emails and summarize. Today we put it to work on real reporting chores.</p>
+      <ul>
+        <li><span class="check">1️⃣</span> Pull data off a web page, no scraper</li>
+        <li><span class="check">2️⃣</span> Turn a messy PDF into a structured spreadsheet</li>
+        <li><span class="check">3️⃣</span> Compare two versions of a bill to find what changed</li>
+        <li><span class="check">4️⃣</span> Clean and standardize messy names or addresses</li>
+        <li><span class="check">5️⃣</span> Build a quick app to browse and search your documents</li>
+      </ul>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 3 WHAT YOU'LL NEED -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div></div>
+    <div class="body top-aligned">
+      <h2>What you'll need</h2>
+      <ul>
+        <li><span class="check">✅</span> A free ChatGPT <em>or</em> Claude account</li>
+        <li><span class="check">✅</span> A laptop (preferably no tablets)</li>
+        <li><span class="check">✅</span> The sample folder open: <span class="link">bit.ly/ire-ai-2026</span></li>
+        <li><span class="check">✅</span> A reporter's instinct to spot-check what it gives you</li>
+      </ul>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 4 RUN OF SHOW -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="body top-aligned">
+      <h2>How this hour works</h2>
+      <p class="small" style="margin:-12px 0 14px;">I demo each task once, then you try it with a sample file.</p>
+      <table class="agenda-table">
+        <tr><td class="t">1</td><td class="b">Web page → table</td><td><span class="mode hands">Hands-on</span></td></tr>
+        <tr><td class="t">2</td><td class="b">Messy PDF → spreadsheet</td><td><span class="mode hands">Hands-on</span></td></tr>
+        <tr><td class="t">3</td><td class="b">Compare two documents</td><td><span class="mode watch">Watch-along</span></td></tr>
+        <tr><td class="t">4</td><td class="b">Clean messy names/addresses</td><td><span class="mode hands">Hands-on</span></td></tr>
+        <tr><td class="t">5</td><td class="b">Build a browse app</td><td><span class="mode watch">Watch-along</span></td></tr>
+      </table>
+      <p class="small" style="margin-top:16px;">Save the prompts. Every task is a tipsheet you can redo at home.</p>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 5 TRANSFORM VS FACTS -->
+  <section class="slide" style="background:var(--cream-dark);">
+    <div class="chrome top"><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="dot"></div></div>
+    <div class="body big-center">
+      <h2 style="margin-bottom:24px;">Trust it to transform, not to know</h2>
+      <p class="lead" style="font-size:34px;line-height:1.45;">AI is great at <u>transforming</u>: reshaping, extracting, comparing.<br>It is risky on <u>facts</u>.</p>
+      <p class="lead" style="font-size:26px;margin-top:30px;color:#555;">Spot-check everything it pulls against the source before you trust it.</p>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div><div class="bar c"></div></div>
+  </section>
+
+  <!-- 6 HOW TO HAND IT A FILE -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="body top-aligned">
+      <h2>Three ways to hand AI your material</h2>
+      <ul>
+        <li><span class="check">📎</span> <strong>Upload a file</strong>: the paperclip or “+” button. PDFs, spreadsheets, images.</li>
+        <li><span class="check">📋</span> <strong>Paste the text</strong>: a column of values, a page's content, a code snippet.</li>
+        <li><span class="check">🔗</span> <strong>Give a URL</strong>: if your tool can browse, paste the link and let it read.</li>
+      </ul>
+      <p class="notice">Tip: tell it <strong>what the thing is</strong> and <strong>what you want back</strong> (a table, CSV, a diff). Specifics beat politeness.</p>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 7 TASK 1 - THE PAGE -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="body top-aligned" style="align-items:center;text-align:center;">
+      <h2 style="margin-bottom:8px;">1 · Pull data off this page</h2>
+      <a class="link" style="font-size:22px;" target="_blank" rel="noopener" href="https://www.flycou.com/passenger-load-data/?ParamAirline&amp;ParamYear=2025">flycou.com/passenger-load-data</a>
+      <a target="_blank" rel="noopener" href="https://www.flycou.com/passenger-load-data/?ParamAirline&amp;ParamYear=2025">
+        <img src="img/cou-passenger-load.png" alt="Columbia Regional Airport 2025 passenger load data table"
+             style="display:block;margin-top:16px;max-height:430px;width:auto;border:2px solid var(--ink);border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.12);">
+      </a>
+      <p class="small" style="margin-top:14px;">Each year is its own page: ◄ 2024 … 2026 ►, all the way back to 2002.</p>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 8 TASK 1 - THE PROMPT -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="body top-aligned">
+      <h2>1 · Web page → table</h2>
+      <span class="filechip">Sample: <a class="link" target="_blank" rel="noopener" href="https://www.flycou.com/passenger-load-data/?ParamAirline&amp;ParamYear=2025">flycou.com passenger load data</a> · one page per year (2002–2025)</span>
+      <div class="tag blue">◆ Extract</div>
+      <div class="prompt sm">Here's a web page of monthly airport passenger numbers: [paste URL or page text]. Extract every row into a table with columns: month, enplanements, deplanements, monthly total, % change vs. prior year. One row per month. If a value is missing, leave it blank; don't guess. Return as CSV.</div>
+      <div class="tag blue">◆ Then scale it</div>
+      <div class="prompt sm">That's only 2025. Here's the 2024 page; append those rows in the same format, with a "year" column. (Repeat back to 2002.)</div>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- TASK 2 - THE FILE -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="body top-aligned">
+      <h2 style="margin-bottom:16px;">2 · A ~1,000-page PDF</h2>
+      <div style="display:flex;gap:34px;align-items:flex-start;flex:1;">
+        <a target="_blank" rel="noopener" href="https://www.tsa.gov/foia/readingroom">
+          <img src="img/tsa-pdf-page1-001.png" alt="TSA throughput report, page 1"
+               style="display:block;max-height:436px;width:auto;border:2px solid var(--ink);border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.12);">
+        </a>
+        <div style="flex:1;padding-top:6px;">
+          <p class="lead" style="font-size:25px;">Every airport, every checkpoint, every hour. Nobody copy-pastes this by hand.</p>
+          <p style="margin-top:24px;font-size:21px;">Source: <a class="link" target="_blank" rel="noopener" href="https://www.tsa.gov/foia/readingroom">tsa.gov/foia/readingroom</a></p>
+          <p style="margin-top:12px;font-size:21px;">How I used it: <a class="link" target="_blank" rel="noopener" href="https://www.ajc.com/business/2025/11/atlanta-airport-security-waits-could-be-worst-these-thanksgiving-travel-days/?gift_article_code=ZUFWNVBfbXRtX0ZvUnJ4RlJMdlNWLS1sUm5Uak5YNDJWSGVPbjJMTGtoTToxNzg0NTUzNzcwOmQyZjZmNmZjYjhjYTVhNzA&amp;utm_campaign=articlegifting">AJC story: Thanksgiving airport security waits</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 8 TASK 2 - THE PROMPT -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="body top-aligned">
+      <h2>2 · Messy PDF → spreadsheet</h2>
+      <span class="filechip">Sample: most recent weekly <a class="link" target="_blank" rel="noopener" href="https://www.tsa.gov/foia/readingroom">TSA throughput report</a> (PDF, ~1,000 pages)</span>
+      <div class="tag blue">◆ Extract</div>
+      <div class="prompt sm">This PDF is a weekly TSA throughput report. Extract the data into a table with these columns: [list them]. Don't infer values that aren't in the document. Dates as YYYY-MM-DD; numbers plain (no $ or commas). Keep every page. Return as CSV.</div>
+      <div class="tag blue">◆ Validate</div>
+      <div class="prompt sm">List any rows where a value looked ambiguous or hard to read, and tell me which page each came from, so I can check the original.</div>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 9 TASK 3 -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="body top-aligned">
+      <h2>3 · Compare two versions</h2>
+      <span class="filechip">Sample: GA HB 268 school-safety bill, as introduced vs. as passed</span>
+      <div class="tag blue">◆ Diff</div>
+      <div class="prompt sm">Here are two versions of a bill: VERSION A (as introduced) and VERSION B (as passed). Show everything that changed A→B: language added, removed, and reworded (show before/after). Group by section. Ignore formatting-only differences. Flag any change that shifts who benefits, who pays, deadlines, or penalties.</div>
+      <p class="notice">Watch for the buried shift: this bill drifted from <strong>mental-health</strong> provisions toward <strong>physical security &amp; surveillance</strong>.</p>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 10 TASK 4 -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="body top-aligned">
+      <h2>4 · Clean messy names &amp; addresses</h2>
+      <span class="filechip">Sample: Fulton County precinct list, inconsistent names &amp; addresses</span>
+      <div class="tag blue">◆ Standardize</div>
+      <div class="prompt sm">Here's a column of [precinct locations / addresses] entered inconsistently by different people. Make a table with two columns: the original value, and a standardized version. Standardize capitalization and abbreviations (St/Street, Inc/Incorporated). Do NOT merge two values unless you're confident they're the same entity. Flag any you're unsure about in a third column.</div>
+      <p class="notice">The <strong>“don't merge”</strong> flag is the point: near-duplicates aren't always the same place.</p>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 11 TASK 5 -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="body top-aligned">
+      <h2>5 · Build an app by iterating</h2>
+      <span class="filechip">Sample: 9,091 Habersham County ballots: precinct, party, governor vote (CSV)</span>
+      <div class="tag blue">◆ Start small</div>
+      <div class="prompt sm">I have a CSV of ballot records. Write one self-contained HTML file that shows them in a searchable, sortable table. No build tools, no server; it runs by opening the file. Put the data at the top so I can swap in my own.</div>
+      <div class="tag blue">◆ Then keep asking</div>
+      <div class="prompt sm">Now add a filter by precinct and by party, and a count of matching rows. → Then: let me click a row for the full record. → Then: the governor votes have OCR typos; group near-identical names so I can spot them.</div>
+      <p class="notice">The skill isn't the first prompt. It's the <strong>back-and-forth</strong>: ship something tiny, look at it, ask for the next thing.</p>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 12 CASE STUDY -->
+  <section class="slide" style="background:var(--cream-dark);">
+    <div class="chrome top"><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="dot"></div></div>
+    <div class="body top-aligned">
+      <h2>The deeper version: 162,847 ballots</h2>
+      <p class="lead" style="font-size:25px;">Cobb County scanned ballot images → structured data on a governor's race and two Supreme Court races. Same pattern as today, at scale:</p>
+      <ul style="margin-top:8px;">
+        <li><span class="check">①</span> Find the machine-readable layer (a clean text summary page)</li>
+        <li><span class="check">②</span> Write code to extract: OCR + regex across 162K files</li>
+        <li><span class="check">③</span> Exceptions are a second dataset: build review tools (<a class="link" target="_blank" rel="noopener" href="../ballot-review/index.html">see a live one</a>)</li>
+        <li><span class="check">④</span> Verify totals against official results before you publish</li>
+      </ul>
+      <p class="notice" style="margin-top:16px;"><strong>AI accelerated the coding, not the journalism.</strong> The judgment stayed with the reporter.</p>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div><div class="bar c"></div></div>
+  </section>
+
+  <!-- 13 TAKEAWAYS -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div></div>
+    <div class="body top-aligned">
+      <h2>Three things to try Monday</h2>
+      <ul>
+        <li><span class="check">1️⃣</span> Next messy PDF → ask for a CSV, then ask <em>which rows to double-check</em>.</li>
+        <li><span class="check">2️⃣</span> Two versions of anything → ask for a grouped diff and <em>what shifts who benefits</em>.</li>
+        <li><span class="check">3️⃣</span> A pile of records → ask for a one-file app to <em>search and browse</em> them.</li>
+      </ul>
+      <p class="small" style="margin-top:20px;">Always verify facts. AI is your assistant, not your editor.</p>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 14 QUESTIONS -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div><div class="bar c"></div></div>
+    <div class="body">
+      <h1>Can it do this?</h1>
+      <p class="lead" style="margin-top:18px;color:#555;">Shout out a task. Let's try it live.</p>
+      <div style="margin-top:34px;font-size:24px;line-height:1.8;">
+        <div>All sessions, slides &amp; sample files:</div>
+        <div class="url" style="font-size:38px;">bit.ly/ire-ai-2026</div>
+        <div style="margin-top:20px;">Charles Minshew · <span class="link">charles.minshew@ajc.com</span></div>
+      </div>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+  </section>
+
+</div>
+
+<div class="pageno"><span id="cur">1</span> / <span id="total">17</span></div>
+<div class="hint">← → arrows to navigate · F for fullscreen</div>
+
+<script>
+  // Inject persistent session URL into every slide except the first (pre-title) and last (questions)
+  const allSlides = Array.from(document.querySelectorAll('.slide'));
+  allSlides.slice(1, -1).forEach(s => {
+    const el = document.createElement('div');
+    el.className = 'session-url';
+    el.textContent = 'bit.ly/ire-ai-2026';
+    s.appendChild(el);
+  });
+
+  const slides = allSlides;
+  let i = 0;
+  document.getElementById('total').textContent = slides.length;
+  slides[0].classList.add('active');
+
+  // Scale the 1280x720 design canvas to fill the viewport (leaving a small margin)
+  function fit() {
+    const margin = 0.97;
+    const s = Math.min((window.innerWidth * margin) / 1280, (window.innerHeight * margin) / 720);
+    document.documentElement.style.setProperty('--scale', s);
+  }
+  window.addEventListener('resize', fit);
+  fit();
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+    document.getElementById('cur').textContent = i + 1;
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { show(i + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { show(i - 1); e.preventDefault(); }
+    else if (e.key === 'Home') show(0);
+    else if (e.key === 'End') show(slides.length - 1);
+    else if (e.key.toLowerCase() === 'f') {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+  // click right half = next, left half = prev (but let links work normally)
+  document.addEventListener('click', e => {
+    if (e.target.closest('a')) return;
+    if (e.clientX > window.innerWidth / 2) show(i + 1); else show(i - 1);
+  });
+  show(0);
+</script>
+</body>
+</html>

@@ -21,6 +21,9 @@ Come for a fast-paced walkthrough of real investigative tasks, with time for "ca
 
 ## Materials
 
-- [demo-agenda.md](demo-agenda.md) — the run-of-show: what I demo, what you try, and the sample files
+- [slides/index.html](slides/index.html) — the session slides (open in a browser; arrow keys to navigate, F for fullscreen) — also a take-home tipsheet, every prompt is on a slide
+- [⬇ Download all sample files (.zip)](https://download-directory.github.io/?url=https://github.com/charlesminshew/ire26/tree/main/02-ai-research-assistant/samples) — the web page, PDFs, and CSVs used in the demo, in one zip ([browse them here](samples/))
 - [demo-tasks.md](demo-tasks.md) — the five demo tasks with copy-paste prompts you can take home and adapt
+- [prompts.md](prompts.md) — the prompts behind the real ballot work: OCR at scale, safe classification, review tools, reconciling counts, and ticket-splitting
 - [case-study-cobb-ballots.md](case-study-cobb-ballots.md) — a real "AI-in-the-loop" project: extracting structured data from 162,847 scanned ballot images with OCR, regex, and browser-based review tools
+- [ballot-review/index.html](ballot-review/index.html) — a working, projector-ready ballot-correction tool (the case study's review tool): the 32 emergency/provisional ballots the OCR pipeline skipped in last week's Montgomery County runoff (June 16, 2026). Read each ballot face and record the Governor vote (Jackson/Jones) with one keystroke
