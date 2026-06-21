@@ -218,14 +218,14 @@
     <div class="big-step">1</div>
     <div class="body top-aligned">
       <h2>Step 1: Read &amp; flag</h2>
-      <p class="small" style="margin:-16px 0 14px;">You have a document. You don't know if it's worth your time. Let AI be the first reader.</p>
+      <p class="small" style="margin:-16px 0 14px;">We're using <strong>United States v. Fulton County</strong> — a federal jail conditions case with a consent decree and two monitor's reports. Let AI be the first reader.</p>
       <div class="prompt">
-        <span class="lbl">Triage prompt</span>
-        Read this document as a journalist. List the three most significant facts a reporter should follow up on. For each one, note which page it's on and why it matters. Flag anything that looks inconsistent, missing, or unusual.
+        <span class="lbl">Triage prompt — Monitor's Report</span>
+        Read this monitor's report as an investigative journalist. List the five most significant findings about jail conditions. For each one: what page is it on? What did the monitor find? Is Fulton County in compliance? What should a reporter follow up on? Flag anything described as urgent or deteriorating.
       </div>
       <div class="prompt">
-        <span class="lbl">Comparison prompt</span>
-        Compare these two versions of this document. What changed? Focus on anything that shifts money, liability, deadlines, or who benefits. Ignore formatting differences.
+        <span class="lbl">Comparison prompt — Report 1 vs. Report 2</span>
+        I have two monitor's reports on Fulton County Jail. Compare them on staffing, medical care, and physical conditions. For each area: what did Report 1 find? What did Report 2 find? Did things improve, worsen, or stay the same?
       </div>
     </div>
     <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
@@ -308,25 +308,23 @@
       <p class="small" style="margin:-16px 0 16px;">The tighter your schema, the more consistent the output — and the easier it is to catch when something goes wrong.</p>
       <div class="two-col">
         <div class="card">
-          <h3>Inspection reports</h3>
+          <h3>Consent Decree requirements</h3>
           <ul class="li-sm">
-            <li><span class="ck">→</span> facility_name</li>
-            <li><span class="ck">→</span> address</li>
-            <li><span class="ck">→</span> inspection_date (YYYY-MM-DD)</li>
-            <li><span class="ck">→</span> inspector_name</li>
-            <li><span class="ck">→</span> violations (list)</li>
-            <li><span class="ck">→</span> result (pass / fail / pending)</li>
+            <li><span class="ck">→</span> section_number</li>
+            <li><span class="ck">→</span> requirement (one sentence)</li>
+            <li><span class="ck">→</span> deadline (YYYY-MM-DD or "ongoing")</li>
+            <li><span class="ck">→</span> responsible_party</li>
+            <li><span class="ck">→</span> topic_area (staffing / medical / physical / etc.)</li>
           </ul>
         </div>
         <div class="card">
-          <h3>Court filings</h3>
+          <h3>Monitor's Report findings</h3>
           <ul class="li-sm">
-            <li><span class="ck">→</span> case_number</li>
-            <li><span class="ck">→</span> filing_date (YYYY-MM-DD)</li>
-            <li><span class="ck">→</span> plaintiff</li>
-            <li><span class="ck">→</span> defendant</li>
-            <li><span class="ck">→</span> charge_or_claim</li>
-            <li><span class="ck">→</span> disposition</li>
+            <li><span class="ck">→</span> section</li>
+            <li><span class="ck">→</span> page_number</li>
+            <li><span class="ck">→</span> finding (one sentence)</li>
+            <li><span class="ck">→</span> compliance_status (compliant / partial / non-compliant)</li>
+            <li><span class="ck">→</span> flagged_urgent (yes / no)</li>
           </ul>
         </div>
       </div>

@@ -19,6 +19,16 @@ Agencies produce mountains of PDFs, scanned records, and semi-structured documen
 - Free account at [ChatGPT](https://chat.openai.com) or [Claude](https://claude.ai)
 - A PDF you'd like to turn into data (optional)
 
+## Sample documents
+
+**United States v. Fulton County** (federal jail conditions case) — three documents, one case, a natural story arc:
+
+- [Consent Decree](sample-docs/consent-decree.pdf) (71 pages) — what the feds required Fulton County Jail to fix
+- [Monitor's First Report](sample-docs/monitor-report-1.pdf) (40 pages) — early compliance assessment
+- [Monitor's Second Report](sample-docs/monitor-report-2.pdf) (355 pages) — detailed findings; too long to paste into ChatGPT, which is the lesson
+
+See [sample-docs/README.md](sample-docs/README.md) for tailored demo prompts for each document.
+
 ## Materials
 
 - [slides/](slides/index.html) — session slide deck (open in any browser, arrow keys to navigate)
