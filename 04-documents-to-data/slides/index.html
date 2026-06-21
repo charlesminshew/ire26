@@ -25,17 +25,10 @@
     color: var(--ink);
     overflow: hidden;
   }
-  .deck {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  .deck { width:100vw; height:100vh; display:flex; align-items:center; justify-content:center; }
   .slide {
     display: none;
-    width: 1280px;
-    height: 720px;
+    width: 1280px; height: 720px;
     background: var(--cream);
     border-radius: 22px;
     border: 3px solid var(--ink);
@@ -43,223 +36,78 @@
     padding: 64px 72px;
     flex-direction: column;
     box-shadow: 0 18px 50px rgba(0,0,0,0.18);
-    transform: scale(var(--scale, 1));
+    transform: scale(var(--scale,1));
     transform-origin: center center;
   }
   .slide.active { display: flex; }
 
-  .chrome {
-    position: absolute;
-    left: 36px; right: 36px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .chrome.top { top: 26px; }
-  .chrome.bottom { bottom: 26px; }
-  .bar { height: 14px; border: 2px solid var(--ink); border-radius: 20px; background: var(--cream); }
-  .bar.a { width: 120px; } .bar.b { flex: 1; } .bar.c { width: 200px; }
-  .dot { width: 30px; height: 14px; border: 2px solid var(--ink); border-radius: 20px; }
-  .dot.blue { background: var(--blue); }
-  .dot.yellow { background: var(--yellow); }
-  .dot.coral { background: var(--coral); }
+  .chrome { position:absolute; left:36px; right:36px; display:flex; align-items:center; gap:10px; }
+  .chrome.top { top:26px; } .chrome.bottom { bottom:26px; }
+  .bar { height:14px; border:2px solid var(--ink); border-radius:20px; background:var(--cream); }
+  .bar.a { width:120px; } .bar.b { flex:1; } .bar.c { width:200px; }
+  .dot { width:30px; height:14px; border:2px solid var(--ink); border-radius:20px; }
+  .dot.blue { background:var(--blue); } .dot.yellow { background:var(--yellow); } .dot.coral { background:var(--coral); }
 
-  h1 {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-weight: 900;
-    font-size: 64px;
-    line-height: 1.05;
-    letter-spacing: -1px;
-  }
-  h2 {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-weight: 800;
-    font-size: 46px;
-    margin-bottom: 28px;
-    letter-spacing: -0.5px;
-  }
-  h3 {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-weight: 800;
-    font-size: 32px;
-    margin-bottom: 16px;
-  }
-  .body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-  .top-aligned { justify-content: flex-start; padding-top: 8px; }
+  h1 { font-family:'Playfair Display',Georgia,serif; font-weight:900; font-size:64px; line-height:1.05; letter-spacing:-1px; }
+  h2 { font-family:'Playfair Display',Georgia,serif; font-weight:800; font-size:46px; margin-bottom:24px; letter-spacing:-0.5px; }
+  h3 { font-family:'Playfair Display',Georgia,serif; font-weight:800; font-size:28px; margin-bottom:10px; }
 
-  ul { list-style: none; }
-  li {
-    font-size: 26px;
-    line-height: 1.5;
-    margin: 12px 0;
-    padding-left: 48px;
-    position: relative;
-  }
-  li .check { position: absolute; left: 0; top: 0; }
-  .small-li li { font-size: 22px; margin: 8px 0; }
+  .body { flex:1; display:flex; flex-direction:column; justify-content:center; }
+  .top-aligned { justify-content:flex-start; padding-top:8px; }
 
-  .grid2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
-  }
-  .grid3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px 30px;
-    text-align: center;
-  }
-  .grid3 .cell {
-    font-family: 'Playfair Display', serif;
-    font-weight: 800;
-    font-size: 26px;
-    line-height: 1.2;
-  }
+  ul { list-style:none; }
+  li { font-size:26px; line-height:1.5; margin:11px 0; padding-left:48px; position:relative; }
+  li .ck { position:absolute; left:0; top:0; }
+  .li-sm li { font-size:21px; margin:7px 0; }
 
-  .card {
-    background: white;
-    border: 2px solid var(--ink);
-    border-radius: 14px;
-    padding: 22px 26px;
-  }
-  .card h3 { font-size: 26px; margin-bottom: 10px; }
-  .card p, .card li { font-size: 20px; line-height: 1.5; }
-  .card li { margin: 6px 0; padding-left: 20px; }
-  .card li::before { content: "→"; position: absolute; left: 0; }
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; }
+  .three-col { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
 
-  .prompt {
-    background: white;
-    border: 2px solid var(--ink);
-    border-radius: 12px;
-    padding: 18px 22px;
-    font-size: 20px;
-    line-height: 1.5;
-    margin: 12px 0;
-  }
-  .prompt .label {
-    font-weight: 700;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--coral);
-    display: block;
-    margin-bottom: 6px;
-  }
-  .code {
-    background: #1e1e2e;
-    color: #cdd6f4;
-    border-radius: 12px;
-    padding: 20px 24px;
-    font-family: 'Courier New', monospace;
-    font-size: 18px;
-    line-height: 1.6;
-    margin: 12px 0;
-  }
-  .code .kw { color: #cba6f7; }
-  .code .str { color: #a6e3a1; }
-  .code .cm { color: #6c7086; }
+  .card { background:white; border:2px solid var(--ink); border-radius:14px; padding:20px 24px; }
+  .card h3 { font-size:24px; }
+  .card p, .card li { font-size:19px; line-height:1.5; }
+  .card li { margin:5px 0; padding-left:22px; }
+  .card li::before { content:"→"; position:absolute; left:0; }
 
-  .tag {
-    font-family: 'Playfair Display', serif;
-    font-weight: 800;
-    font-size: 20px;
-    margin: 14px 0 4px;
-    color: var(--blue);
-  }
+  .prompt { background:white; border:2px solid var(--ink); border-radius:12px; padding:16px 20px; font-size:20px; line-height:1.5; margin:10px 0; }
+  .prompt .lbl { font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:1px; color:var(--coral); display:block; margin-bottom:6px; }
 
-  .pillhead {
-    display: inline-flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 24px;
-  }
-  .circle { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; }
-  .circle.green { background: var(--green); }
-  .circle.red { background: var(--coral); }
-  .circle.blue { background: var(--blue); }
+  .code { background:#1e1e2e; color:#cdd6f4; border-radius:12px; padding:18px 22px; font-family:'Courier New',monospace; font-size:17px; line-height:1.6; margin:10px 0; }
+  .kw { color:#cba6f7; } .str { color:#a6e3a1; } .cm { color:#585b70; }
 
-  .big-number {
-    font-family: 'Playfair Display', serif;
-    font-weight: 900;
-    font-size: 80px;
-    color: var(--coral);
-    line-height: 1;
-    margin-right: 16px;
-  }
-  .step-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    margin: 16px 0;
-  }
-  .step-text { flex: 1; }
-  .step-text strong { font-size: 24px; display: block; margin-bottom: 4px; }
-  .step-text span { font-size: 19px; color: #555; }
+  .warn { background:#fff8e6; border:2px solid var(--yellow); border-radius:10px; padding:12px 16px; font-size:19px; margin:10px 0; }
+  .good { background:#f0faf2; border:2px solid var(--green); border-radius:10px; padding:12px 16px; font-size:19px; margin:10px 0; }
 
-  .warn {
-    background: #fff8e6;
-    border: 2px solid var(--yellow);
-    border-radius: 10px;
-    padding: 14px 18px;
-    font-size: 20px;
-    margin: 10px 0;
-  }
+  .big-step { font-family:'Playfair Display',serif; font-weight:900; font-size:120px; color:var(--coral); line-height:0.9; opacity:0.15; position:absolute; right:72px; top:50px; }
 
-  .meta {
-    position: absolute;
-    bottom: 70px; right: 72px;
-    text-align: right;
-    font-size: 22px;
-    line-height: 1.4;
-  }
-  .slash { position: absolute; bottom: 64px; left: 72px; font-size: 50px; font-weight: 700; font-family:'Playfair Display',serif; }
+  .tag { font-family:'Playfair Display',serif; font-weight:800; font-size:19px; margin:12px 0 4px; color:var(--blue); }
 
-  .session-url {
-    position: absolute;
-    bottom: 44px; right: 72px;
-    font-size: 15px;
-    color: var(--blue);
-    font-weight: 600;
-    opacity: 0.75;
-  }
+  .flow { display:flex; align-items:stretch; gap:0; margin:18px 0; }
+  .fbox { background:white; border:2px solid var(--ink); border-radius:10px; padding:12px 14px; font-size:17px; font-weight:600; text-align:center; flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; }
+  .fbox small { font-size:13px; color:#777; font-weight:400; }
+  .farrow { font-size:26px; color:var(--coral); padding:0 6px; display:flex; align-items:center; flex-shrink:0; }
 
-  .big-center { text-align: center; }
-  .url { font-family:'Playfair Display',serif; font-weight:800; color:var(--blue); font-size:30px; }
-  .lead { font-size: 26px; line-height: 1.5; }
-  .small { font-size: 19px; color: #555; }
+  .session-url { position:absolute; bottom:44px; right:72px; font-size:15px; color:var(--blue); font-weight:600; opacity:0.75; }
+  .slash { position:absolute; bottom:64px; left:72px; font-size:50px; font-weight:700; font-family:'Playfair Display',serif; }
+  .meta { position:absolute; bottom:70px; right:72px; text-align:right; font-size:22px; line-height:1.4; }
+  .url { font-family:'Playfair Display',serif; font-weight:800; color:var(--blue); }
+  .lead { font-size:26px; line-height:1.5; }
+  .small { font-size:19px; color:#555; }
+  .big-center { text-align:center; }
 
   .pageno { position:fixed; bottom:14px; right:20px; font-size:14px; color:#6b6453; z-index:10; }
   .hint { position:fixed; bottom:14px; left:20px; font-size:13px; color:#9b9482; z-index:10; }
 
-  .workflow {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    justify-content: center;
-    margin: 20px 0;
-  }
-  .wf-box {
-    background: white;
-    border: 2px solid var(--ink);
-    border-radius: 10px;
-    padding: 14px 18px;
-    font-size: 18px;
-    font-weight: 600;
-    text-align: center;
-    flex: 1;
-  }
-  .wf-arrow {
-    font-size: 28px;
-    color: var(--coral);
-    padding: 0 6px;
-    flex-shrink: 0;
-  }
-
-  .two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    align-items: start;
+  .vibe-badge {
+    display:inline-block;
+    background:var(--coral);
+    color:white;
+    font-weight:700;
+    font-size:16px;
+    padding:4px 14px;
+    border-radius:20px;
+    letter-spacing:0.5px;
+    margin-bottom:16px;
   }
 </style>
 </head>
@@ -297,375 +145,309 @@
     <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div></div>
     <div class="body top-aligned">
       <h2>The data is there. It's just trapped.</h2>
-      <p class="lead" style="margin-bottom:24px;">Government agencies, courts, and institutions produce documents at volume. The data inside those documents is real — it just hasn't been extracted yet.</p>
-      <div class="grid3">
-        <div class="cell" style="font-size:22px;">Scanned PDFs of inspection reports</div>
-        <div class="cell" style="font-size:22px;">Court filings with structured fields</div>
-        <div class="cell" style="font-size:22px;">Contracts with buried terms</div>
-        <div class="cell" style="font-size:22px;">Police use-of-force forms</div>
-        <div class="cell" style="font-size:22px;">Campaign finance disclosure PDFs</div>
-        <div class="cell" style="font-size:22px;">Hundreds of bills that all look the same</div>
+      <p class="lead" style="margin-bottom:22px;">Court filings, inspection reports, financial disclosures — they all contain structured information locked inside unstructured formats.</p>
+      <div class="three-col">
+        <div class="card"><h3>📄 PDFs</h3><p>Tables that look like tables but can't be copied. Fields that are always in the same place but have no column headers.</p></div>
+        <div class="card"><h3>🖨️ Scanned docs</h3><p>Images of pages. No embedded text at all. Need OCR before you can do anything with them.</p></div>
+        <div class="card"><h3>📚 Hundreds of files</h3><p>One document is manageable. Five hundred means you need a system — or you'll never find the needle.</p></div>
       </div>
+      <p class="small" style="margin-top:18px;">Today: we'll use AI to read them, extract the data, and build a tool to search it — and AI will write most of the code.</p>
     </div>
     <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
   </section>
 
-  <!-- 3 FOUR STRATEGIES -->
+  <!-- 3 WHAT IS VIBECODING -->
   <section class="slide">
     <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div></div>
     <div class="body top-aligned">
-      <h2>Four strategies for today</h2>
-      <div class="two-col" style="margin-top:8px;">
+      <div class="vibe-badge">vibecoding</div>
+      <h2 style="margin-bottom:16px;">You direct. AI writes the code.</h2>
+      <p class="lead" style="margin-bottom:20px;">You don't need to know Python or JavaScript. You need to know what you want — and how to tell AI when it got it wrong.</p>
+      <div class="two-col">
         <div class="card">
-          <h3>1 · Read &amp; flag</h3>
-          <p>Use Claude or ChatGPT to read a document and surface what a reporter should dig into further.</p>
+          <h3>What you do</h3>
+          <ul class="li-sm">
+            <li><span class="ck">→</span> Describe the problem clearly</li>
+            <li><span class="ck">→</span> Run what AI gives you</li>
+            <li><span class="ck">→</span> Tell it what broke or what's missing</li>
+            <li><span class="ck">→</span> Repeat until it works</li>
+            <li><span class="ck">→</span> Verify the output against the source</li>
+          </ul>
         </div>
         <div class="card">
-          <h3>2 · Extract structured data</h3>
-          <p>Use PDFplumber and natural-pdf to pull tables and fields out of PDFs locally — no data leaves your machine.</p>
-        </div>
-        <div class="card">
-          <h3>3 · Organize at scale</h3>
-          <p>Build a system for classifying, routing, and tracking a large document collection.</p>
-        </div>
-        <div class="card">
-          <h3>4 · Go local</h3>
-          <p>Run an AI model on your own computer. What that enables — and when it matters.</p>
+          <h3>What AI does</h3>
+          <ul class="li-sm">
+            <li><span class="ck">→</span> Writes the Python or JavaScript</li>
+            <li><span class="ck">→</span> Debugs the errors</li>
+            <li><span class="ck">→</span> Adapts to your specific document</li>
+            <li><span class="ck">→</span> Explains what each part does</li>
+            <li><span class="ck">→</span> Iterates as fast as you can describe</li>
+          </ul>
         </div>
       </div>
     </div>
     <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
   </section>
 
-  <!-- 4 STRATEGY 1: READ & FLAG -->
+  <!-- 4 THE ARC -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div></div>
+    <div class="body top-aligned">
+      <h2>What we'll do today</h2>
+      <div class="flow" style="margin:20px 0 24px;">
+        <div class="fbox" style="border-color:var(--coral);"><span style="font-size:28px;">📄</span><strong>Documents</strong><small>PDFs, scans, filings</small></div>
+        <div class="farrow">→</div>
+        <div class="fbox"><span style="font-size:28px;">🔍</span><strong>Read &amp; flag</strong><small>AI as first reader</small></div>
+        <div class="farrow">→</div>
+        <div class="fbox"><span style="font-size:28px;">⚙️</span><strong>Extract data</strong><small>vibecoded locally</small></div>
+        <div class="farrow">→</div>
+        <div class="fbox" style="border-color:var(--green);"><span style="font-size:28px;">🗂️</span><strong>Browse &amp; search</strong><small>vibecoded HTML tool</small></div>
+      </div>
+      <ul>
+        <li><span class="ck">1️⃣</span> <strong>Read &amp; flag</strong> — coach AI to read a document and surface what to dig into</li>
+        <li><span class="ck">2️⃣</span> <strong>Extract locally</strong> — vibecode a Python script that pulls structured data out of PDFs without sending them anywhere</li>
+        <li><span class="ck">3️⃣</span> <strong>Build the tool</strong> — vibecode a self-contained HTML browser for your extracted data</li>
+      </ul>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 5 STEP 1: READ & FLAG -->
   <section class="slide">
     <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="big-step">1</div>
     <div class="body top-aligned">
-      <h2>Strategy 1: Read &amp; flag</h2>
-      <p class="small" style="margin:-16px 0 16px;">You have a document. You don't know if it's worth your time. Let AI be the first reader.</p>
+      <h2>Step 1: Read &amp; flag</h2>
+      <p class="small" style="margin:-16px 0 14px;">You have a document. You don't know if it's worth your time. Let AI be the first reader.</p>
       <div class="prompt">
-        <span class="label">The triage prompt</span>
+        <span class="lbl">Triage prompt</span>
         Read this document as a journalist. List the three most significant facts a reporter should follow up on. For each one, note which page it's on and why it matters. Flag anything that looks inconsistent, missing, or unusual.
       </div>
       <div class="prompt">
-        <span class="label">The comparison prompt</span>
-        Compare these two contracts/reports. What changed between version A and version B? Focus on anything that shifts money, liability, deadlines, or who benefits. Ignore formatting differences.
+        <span class="lbl">Comparison prompt</span>
+        Compare these two versions of this document. What changed? Focus on anything that shifts money, liability, deadlines, or who benefits. Ignore formatting differences.
       </div>
     </div>
     <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
   </section>
 
-  <!-- 5 STRATEGY 1: CAVEATS -->
+  <!-- 6 STEP 1: RULES -->
   <section class="slide">
     <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div></div>
+    <div class="big-step">1</div>
     <div class="body top-aligned">
-      <h2>Strategy 1: the rules</h2>
+      <h2>Step 1: the rules</h2>
       <ul>
-        <li><span class="check">✅</span> <strong>Use AI as a first reader, not a final one.</strong> It flags things for you to verify — it does not verify them.</li>
-        <li><span class="check">✅</span> <strong>Ask for page numbers.</strong> If AI can't cite a page, it may be hallucinating the fact.</li>
-        <li><span class="check">✅</span> <strong>Treat it like a source.</strong> You wouldn't publish a tip without checking it. Same rule applies here.</li>
-        <li><span class="check">⚠️</span> <strong>It will miss things.</strong> Long documents exceed context limits. Break large docs into sections.</li>
-        <li><span class="check">⚠️</span> <strong>Never send sensitive documents</strong> to a cloud AI without knowing your organization's policy.</li>
+        <li><span class="ck">✅</span> <strong>AI is the first reader, not the last.</strong> It flags things for you to verify — it does not verify them.</li>
+        <li><span class="ck">✅</span> <strong>Ask for page numbers.</strong> If AI can't cite the page, it may be making up the fact.</li>
+        <li><span class="ck">✅</span> <strong>Treat it like a tip from a source.</strong> You'd check that before publishing. Same rule.</li>
+        <li><span class="ck">⚠️</span> <strong>Long documents exceed context limits.</strong> Break large docs into sections; ask AI to read them in chunks.</li>
+        <li><span class="ck">⚠️</span> <strong>Know your org's policy</strong> before uploading sensitive documents to a cloud AI. When in doubt — extract locally.</li>
       </ul>
     </div>
     <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
   </section>
 
-  <!-- 6 STRATEGY 2: EXTRACT -->
+  <!-- 7 STEP 2: EXTRACT -->
   <section class="slide">
     <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="big-step">2</div>
     <div class="body top-aligned">
-      <h2>Strategy 2: Extract structured data</h2>
-      <p class="small" style="margin:-16px 0 16px;">When you need data out of a PDF as a table — and you don't want to paste it into a cloud tool.</p>
+      <h2>Step 2: extract data locally</h2>
+      <p class="small" style="margin:-16px 0 14px;">When you need a PDF's tables as real data — and you don't want to paste sensitive documents into a cloud tool.</p>
       <div class="two-col">
         <div>
           <div class="tag">◆ PDFplumber</div>
-          <div class="card" style="margin-top:6px;">
-            <p>Python library. Extracts text, tables, and character positions from born-digital PDFs with high accuracy. Tables come out as lists of lists — easy to push into a spreadsheet.</p>
+          <div class="card">
+            <p>Python library. Extracts text and tables from born-digital PDFs with high accuracy. Tables come out as lists you can push straight into a CSV.</p>
+          </div>
+          <div class="tag" style="margin-top:14px;">◆ natural-pdf</div>
+          <div class="card">
+            <p>Adds AI-assisted layout detection on top of PDFplumber. Better on complex column layouts and mixed content. Also handles scanned PDFs via OCR.</p>
           </div>
         </div>
         <div>
-          <div class="tag">◆ natural-pdf</div>
-          <div class="card" style="margin-top:6px;">
-            <p>Newer library built on top of PDFplumber. Adds AI-assisted layout detection — better at PDFs with complex column layouts or mixed content. Also works on scanned PDFs via OCR.</p>
-          </div>
+          <div class="good">🔒 <strong>Both run entirely on your machine.</strong> Nothing is sent to a server. Matters for documents with sources, PII, or ongoing investigations.</div>
+          <div class="warn" style="margin-top:14px;">⚠️ <strong>Born-digital vs. scanned:</strong> try selecting text in the PDF first. If it highlights cleanly, PDFplumber works great. If not, you need OCR first.</div>
         </div>
       </div>
-      <div class="warn" style="margin-top:18px;">🔒 Both run entirely on your machine. Nothing is sent to a server. This matters for documents with PII or sensitive sources.</div>
     </div>
     <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
   </section>
 
-  <!-- 7 STRATEGY 2: CODE -->
+  <!-- 8 STEP 2: VIBECODING THE SCRIPT -->
   <section class="slide">
     <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="big-step">2</div>
     <div class="body top-aligned">
-      <h2>Strategy 2: what the code looks like</h2>
-      <p class="small" style="margin: -16px 0 12px;">You don't have to write this — ask Claude to write it for your specific PDF. Then run it locally.</p>
-      <div class="code">
+      <h2>Vibecoding the extraction</h2>
+      <div class="prompt" style="margin-bottom:12px;">
+        <span class="lbl">Prompt to Claude or ChatGPT</span>
+        Write a Python script using pdfplumber that opens "inspections.pdf" and extracts the table on page 2. The table has these columns: facility name, address, inspection date, violations, pass/fail. Save the output as "inspections.csv". Explain what each section of the code does.
+      </div>
+      <div class="code" style="font-size:16px;">
 <span class="kw">import</span> pdfplumber, csv
 
-<span class="cm"># Open the PDF and extract the first table on each page</span>
 <span class="kw">with</span> pdfplumber.<span class="kw">open</span>(<span class="str">"inspections.pdf"</span>) <span class="kw">as</span> pdf:
-    rows = []
-    <span class="kw">for</span> page <span class="kw">in</span> pdf.pages:
-        table = page.extract_table()
-        <span class="kw">if</span> table:
-            rows.extend(table)
+    table = pdf.pages[1].extract_table()  <span class="cm"># page 2 = index 1</span>
 
-<span class="cm"># Write to CSV</span>
-<span class="kw">with</span> <span class="kw">open</span>(<span class="str">"output.csv"</span>, <span class="str">"w"</span>) <span class="kw">as</span> f:
-    writer = csv.writer(f)
-    writer.writerows(rows)
+<span class="kw">with</span> <span class="kw">open</span>(<span class="str">"inspections.csv"</span>, <span class="str">"w"</span>, newline=<span class="str">""</span>) <span class="kw">as</span> f:
+    csv.writer(f).writerows(table)
       </div>
-      <p class="small" style="margin-top:8px;">Ask Claude: <em>"Write a pdfplumber script that extracts the table on page 3 of this PDF into a CSV. The table has these columns: [list them]."</em></p>
+      <p class="small">When it breaks: <em>"I got this error: [paste error]. Don't rewrite the whole script. Tell me the minimal fix."</em></p>
     </div>
     <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
   </section>
 
-  <!-- 8 STRATEGY 2: BORN DIGITAL VS SCANNED -->
+  <!-- 9 STEP 2: DEFINE YOUR SCHEMA -->
   <section class="slide">
     <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div></div>
+    <div class="big-step">2</div>
     <div class="body top-aligned">
-      <h2>Born-digital vs. scanned — it matters</h2>
-      <div class="two-col" style="margin-top:8px;">
-        <div class="card">
-          <h3>✅ Born-digital PDF</h3>
-          <ul class="small-li">
-            <li><span class="check">→</span> Text is embedded — copy/paste works</li>
-            <li><span class="check">→</span> PDFplumber extracts reliably</li>
-            <li><span class="check">→</span> Tables come out as structured data</li>
-            <li><span class="check">→</span> Fast even at scale</li>
-          </ul>
-          <p style="font-size:17px;margin-top:12px;color:#555;">How to tell: try selecting text with your cursor. If it highlights cleanly, it's born-digital.</p>
-        </div>
-        <div class="card">
-          <h3>⚠️ Scanned PDF (image)</h3>
-          <ul class="small-li">
-            <li><span class="check">→</span> No embedded text — it's a photo of a page</li>
-            <li><span class="check">→</span> Needs OCR before extraction</li>
-            <li><span class="check">→</span> Error rate depends on scan quality</li>
-            <li><span class="check">→</span> Validate everything against the original</li>
-          </ul>
-          <p style="font-size:17px;margin-top:12px;color:#555;">Tools: Tesseract (free), Adobe Acrobat, ABBYY FineReader. natural-pdf handles this too.</p>
-        </div>
-      </div>
-    </div>
-    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
-  </section>
-
-  <!-- 9 STRATEGY 3: ORGANIZE -->
-  <section class="slide">
-    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
-    <div class="body top-aligned">
-      <h2>Strategy 3: organize at scale</h2>
-      <p class="small" style="margin:-16px 0 16px;">You have 500 PDFs. Before you can extract anything, you need to know what you have.</p>
-      <div class="step-row">
-        <div class="big-number" style="font-size:50px;">1</div>
-        <div class="step-text"><strong>Build a manifest first</strong><span>One row per document. Filename, date received, document type, status. Never process the same file twice. Add columns as you learn more.</span></div>
-      </div>
-      <div class="step-row">
-        <div class="big-number" style="font-size:50px;">2</div>
-        <div class="step-text"><strong>Classify before you extract</strong><span>Use AI to categorize documents into types (complaint, investigation, disposition). Extraction logic differs by type — don't mix them.</span></div>
-      </div>
-      <div class="step-row">
-        <div class="big-number" style="font-size:50px;">3</div>
-        <div class="step-text"><strong>Exceptions are a second dataset</strong><span>Every document your automation can't handle tells you something. Build a simple review tool rather than ignoring them.</span></div>
-      </div>
-    </div>
-    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
-  </section>
-
-  <!-- 10 STRATEGY 3: THE MANIFEST -->
-  <section class="slide">
-    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div></div>
-    <div class="body top-aligned">
-      <h2>What a manifest looks like</h2>
-      <div class="code" style="font-size:17px;">
-filename,            doc_type,      date_received, status,      notes
-complaint_001.pdf,   complaint,     2024-03-01,    extracted,
-complaint_002.pdf,   complaint,     2024-03-01,    review,      OCR unclear p.3
-investigation_01.pdf,investigation, 2024-03-04,    extracted,
-disposition_001.pdf, disposition,   2024-03-04,    pending,
-unknown_file.pdf,    UNKNOWN,       2024-03-04,    manual,      can't classify
-      </div>
-      <ul style="margin-top:16px;" class="small-li">
-        <li><span class="check">→</span> <strong>status</strong> column is the key: extracted / review / pending / manual / done</li>
-        <li><span class="check">→</span> Never delete rows — mark them with a status instead</li>
-        <li><span class="check">→</span> The manifest is your audit trail when an editor asks "how do you know?"</li>
-      </ul>
-    </div>
-    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
-  </section>
-
-  <!-- 11 STRATEGY 3: CLASSIFY PROMPT -->
-  <section class="slide">
-    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
-    <div class="body top-aligned">
-      <h2>Strategy 3: classifying documents with AI</h2>
-      <div class="prompt">
-        <span class="label">Classification prompt (run on each document)</span>
-        Read this document and classify it into exactly one of these categories: complaint, investigation, disposition, other. Return only the category name — nothing else. If you cannot determine the category, return "unknown".
-      </div>
-      <div class="prompt">
-        <span class="label">Then validate</span>
-        I classified 500 documents into these categories. Here is a random sample of 20 with my classifications. Do you agree with each one? Flag any you'd classify differently and explain why.
-      </div>
-      <p class="small" style="margin-top:12px;">Rule of thumb: validate 10–20% of AI classifications manually before you rely on them for a story. The error rate tells you whether to trust the rest.</p>
-    </div>
-    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
-  </section>
-
-  <!-- 12 STRATEGY 4: GO LOCAL -->
-  <section class="slide">
-    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
-    <div class="body top-aligned">
-      <h2>Strategy 4: running AI locally</h2>
-      <p class="small" style="margin:-16px 0 18px;">Why would you run a model on your own laptop instead of using ChatGPT?</p>
+      <h2>Define your schema before you extract</h2>
+      <p class="small" style="margin:-16px 0 16px;">The tighter your schema, the more consistent the output — and the easier it is to catch when something goes wrong.</p>
       <div class="two-col">
-        <div>
-          <ul class="small-li">
-            <li><span class="check">🔒</span> <strong>Sensitive documents</strong> — confidential sources, PII, ongoing investigations</li>
-            <li><span class="check">🔒</span> <strong>Organizational policy</strong> — some newsrooms prohibit sending work product to cloud AI</li>
-            <li><span class="check">🔒</span> <strong>Scale</strong> — processing 10,000 documents without hitting rate limits or paying per-token</li>
+        <div class="card">
+          <h3>Inspection reports</h3>
+          <ul class="li-sm">
+            <li><span class="ck">→</span> facility_name</li>
+            <li><span class="ck">→</span> address</li>
+            <li><span class="ck">→</span> inspection_date (YYYY-MM-DD)</li>
+            <li><span class="ck">→</span> inspector_name</li>
+            <li><span class="ck">→</span> violations (list)</li>
+            <li><span class="ck">→</span> result (pass / fail / pending)</li>
           </ul>
         </div>
-        <div>
-          <div class="card">
-            <h3>How to do it: Ollama</h3>
-            <ul class="small-li">
-              <li><span class="check">→</span> Free, runs on Mac/Windows/Linux</li>
-              <li><span class="check">→</span> One command to download a model: <code style="font-size:16px;">ollama pull llama3</code></li>
-              <li><span class="check">→</span> Works offline, nothing leaves your machine</li>
-              <li><span class="check">→</span> Models are smaller — good enough for classification, weaker for complex analysis</li>
-            </ul>
-          </div>
+        <div class="card">
+          <h3>Court filings</h3>
+          <ul class="li-sm">
+            <li><span class="ck">→</span> case_number</li>
+            <li><span class="ck">→</span> filing_date (YYYY-MM-DD)</li>
+            <li><span class="ck">→</span> plaintiff</li>
+            <li><span class="ck">→</span> defendant</li>
+            <li><span class="ck">→</span> charge_or_claim</li>
+            <li><span class="ck">→</span> disposition</li>
+          </ul>
         </div>
       </div>
+      <div class="warn" style="margin-top:12px;">Rule: if a field isn't in the document, it should be blank — not guessed. Tell AI this explicitly every time.</div>
     </div>
     <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
   </section>
 
-  <!-- 13 STRATEGY 4: WHAT LOCAL MODELS ARE GOOD FOR -->
+  <!-- 10 STEP 2: VALIDATE -->
   <section class="slide">
     <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div></div>
+    <div class="big-step">2</div>
     <div class="body top-aligned">
-      <h2>What local models are (and aren't) good for</h2>
-      <div class="two-col" style="margin-top:8px;">
-        <div class="card">
-          <h3 style="color:var(--green);">✅ Good</h3>
-          <ul class="small-li">
-            <li><span class="check">→</span> Classifying documents into categories</li>
-            <li><span class="check">→</span> Extracting structured fields from consistent templates</li>
-            <li><span class="check">→</span> Summarizing short documents</li>
-            <li><span class="check">→</span> Running the same prompt 10,000 times overnight</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3 style="color:var(--coral);">⚠️ Weaker</h3>
-          <ul class="small-li">
-            <li><span class="check">→</span> Complex reasoning about document meaning</li>
-            <li><span class="check">→</span> Handling long documents (smaller context window)</li>
-            <li><span class="check">→</span> Tasks requiring nuance or legal/domain knowledge</li>
-            <li><span class="check">→</span> Anything you'd want a senior editor to fact-check</li>
-          </ul>
-        </div>
-      </div>
-      <p class="small" style="margin-top:18px;">The sweet spot: use a local model for <strong>triage and classification</strong> at scale, then use a cloud model (or a human) for the <strong>cases that matter most</strong>.</p>
-    </div>
-    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
-  </section>
-
-  <!-- 14 THE FULL WORKFLOW -->
-  <section class="slide">
-    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div></div>
-    <div class="body top-aligned">
-      <h2>Putting it together</h2>
-      <div class="workflow" style="margin-top:18px;">
-        <div class="wf-box">Get documents<br><span style="font-size:14px;color:#777;">FOIA, download, scrape</span></div>
-        <div class="wf-arrow">→</div>
-        <div class="wf-box">Build manifest<br><span style="font-size:14px;color:#777;">one row per file</span></div>
-        <div class="wf-arrow">→</div>
-        <div class="wf-box">Classify &amp; triage<br><span style="font-size:14px;color:#777;">AI or local model</span></div>
-        <div class="wf-arrow">→</div>
-        <div class="wf-box">Extract data<br><span style="font-size:14px;color:#777;">PDFplumber / prompt</span></div>
-        <div class="wf-arrow">→</div>
-        <div class="wf-box">Validate<br><span style="font-size:14px;color:#777;">vs. known totals</span></div>
-        <div class="wf-arrow">→</div>
-        <div class="wf-box">Analyze &amp; report</div>
-      </div>
-      <ul style="margin-top:20px;" class="small-li">
-        <li><span class="check">→</span> <strong>Never skip the manifest.</strong> It's your audit trail and your resume-from-crash insurance.</li>
-        <li><span class="check">→</span> <strong>Always validate against something you already know.</strong> Official totals, published reports, anything.</li>
-        <li><span class="check">→</span> <strong>The exception pile is your story.</strong> 97% automation + 3% manual review often surfaces the most interesting cases.</li>
-        <li><span class="check">→</span> <strong>AI accelerates the coding, not the journalism.</strong> The judgment is still yours.</li>
+      <h2>Validate before you trust it</h2>
+      <ul>
+        <li><span class="ck">1️⃣</span> <strong>Spot-check against originals.</strong> Pick 10–20 random rows. Open the PDF. Compare field by field.</li>
+        <li><span class="ck">2️⃣</span> <strong>Check totals against something you already know.</strong> Official counts, published summaries, anything.</li>
+        <li><span class="ck">3️⃣</span> <strong>Look for hallucinated values.</strong> AI fills in plausible-sounding things that aren't in the document. Null fields that should be null.</li>
+        <li><span class="ck">4️⃣</span> <strong>The exception pile is often the story.</strong> Records the automation can't handle are worth looking at manually.</li>
       </ul>
+      <p class="small" style="margin-top:16px;">You don't need 100% accuracy to publish — you need to know your error rate and account for it.</p>
     </div>
     <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
   </section>
 
-  <!-- 15 COBB COUNTY CASE STUDY -->
+  <!-- 11 STEP 3: BUILD THE TOOL -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="big-step">3</div>
+    <div class="body top-aligned">
+      <h2>Step 3: build the browse tool</h2>
+      <p class="small" style="margin:-16px 0 14px;">You have a CSV. Now vibecode a local web app so you can actually search and report from it.</p>
+      <div class="prompt">
+        <span class="lbl">Prompt to build the tool</span>
+        Write a single self-contained HTML file that loads my CSV of inspection records and lets me: search across all fields as I type, sort by any column, click a row to see the full record, and see a count of matching results. No server, no build tools, no external dependencies — it should work by opening the file in a browser. Put the CSV path at the top so I can swap in my own file.
+      </div>
+      <div class="good" style="margin-top:8px;">✅ You leave today with a working tool for your own documents. No server. No IT department. Just a file you open in Chrome.</div>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 12 STEP 3: ITERATE THE TOOL -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div></div>
+    <div class="big-step">3</div>
+    <div class="body top-aligned">
+      <h2>Iterate until it does what you need</h2>
+      <p class="small" style="margin:-16px 0 14px;">Each prompt adds one feature. You don't have to ask for everything at once.</p>
+      <div class="prompt"><span class="lbl">Add filtering</span>Add a dropdown to filter by the "result" column (pass / fail / pending). Show the record count update as I filter.</div>
+      <div class="prompt"><span class="lbl">Add export</span>Add a button that downloads the currently visible rows as a CSV — so I can export just the records that match my search.</div>
+      <div class="prompt"><span class="lbl">Add flagging</span>Add a "Flag for follow-up" button on each record. Flagged records should appear highlighted and be exportable separately.</div>
+      <p class="small" style="margin-top:10px;">This is the same pattern used to build the review tools in the Cobb County ballot project — keyboard shortcuts, TSV export, resume support. All vibecoded.</p>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 13 SIDEBAR: SENSITIVE DOCS -->
+  <section class="slide">
+    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div></div>
+    <div class="body top-aligned">
+      <h2>What if you can't use a cloud AI?</h2>
+      <p class="small" style="margin:-16px 0 18px;">Confidential sources, ongoing investigations, organizational policy — sometimes you can't paste documents into ChatGPT or Claude.</p>
+      <div class="two-col">
+        <div class="card">
+          <h3>Run a model locally with Ollama</h3>
+          <ul class="li-sm">
+            <li><span class="ck">→</span> Free. Runs on Mac, Windows, Linux.</li>
+            <li><span class="ck">→</span> One command: <code style="font-size:15px;">ollama pull llama3</code></li>
+            <li><span class="ck">→</span> Works offline. Nothing leaves your machine.</li>
+            <li><span class="ck">→</span> Smaller models — good enough for classification, weaker on complex reasoning.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="good" style="margin-bottom:12px;">✅ <strong>Good for:</strong> classifying documents at scale, extracting structured fields from consistent templates, running 10,000 prompts overnight.</div>
+          <div class="warn">⚠️ <strong>Weaker at:</strong> long documents, nuanced analysis, anything you'd want a senior editor to fact-check. Use local for triage; use cloud (or a human) for the cases that matter most.</div>
+        </div>
+      </div>
+    </div>
+    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
+  </section>
+
+  <!-- 14 REAL STORY -->
   <section class="slide" style="background:var(--cream-dark);">
     <div class="chrome top"><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="dot"></div></div>
     <div class="body top-aligned">
       <h2>Real story: 162,847 ballot images</h2>
-      <p class="small" style="margin:-16px 0 16px;">Cobb County, Georgia — May 2026 primary. Every ballot is a 3-page TIFF. The key insight: <strong>page 3 is machine-printed text</strong>, not a scan of handwriting. OCR works reliably on it.</p>
-      <div class="workflow">
-        <div class="wf-box">162K TIFFs</div>
-        <div class="wf-arrow">→</div>
-        <div class="wf-box">Classify ballots<br><span style="font-size:14px;color:#777;">Dem / Rep / NP</span></div>
-        <div class="wf-arrow">→</div>
-        <div class="wf-box">Parse each race<br><span style="font-size:14px;color:#777;">regex + word bounds</span></div>
-        <div class="wf-arrow">→</div>
-        <div class="wf-box">Review tools<br><span style="font-size:14px;color:#777;">for exceptions</span></div>
-        <div class="wf-arrow">→</div>
-        <div class="wf-box">Verify vs.<br>official results</div>
+      <p class="small" style="margin:-16px 0 14px;">Cobb County, Georgia primary — every ballot is a 3-page TIFF. Page 3 is machine-printed text, not a scan of handwriting. OCR works. Everything flows from that one insight.</p>
+      <div class="flow" style="margin:14px 0;">
+        <div class="fbox">162K TIFFs</div>
+        <div class="farrow">→</div>
+        <div class="fbox">Classify<br><small>Dem/Rep/NP</small></div>
+        <div class="farrow">→</div>
+        <div class="fbox">Parse races<br><small>regex + OCR</small></div>
+        <div class="farrow">→</div>
+        <div class="fbox">Review tool<br><small>vibecoded HTML</small></div>
+        <div class="farrow">→</div>
+        <div class="fbox">Verify vs.<br>official results</div>
       </div>
-      <div class="warn" style="margin-top:16px;">🐛 The bug that proves the rule: <code>'rick' in text</code> gave Rick Jackson 313 of Gregg Kirkpatrick's votes. Word-boundary regex (<code>\brick\b</code>) fixed it — but only checking against official totals caught it.</div>
-      <p class="small" style="margin-top:10px;">Full case study at <strong>bit.ly/ire-ai-2026</strong> → Session 4 materials</p>
+      <div class="warn">🐛 <strong>The bug that proves validation:</strong> <code>'rick' in text</code> gave Rick Jackson 313 of Gregg Kirkpatrick's votes. Word-boundary regex fixed it — but only checking against official totals caught it.</div>
+      <div class="good" style="margin-top:10px;">The review tools were vibecoded: show ballot image, one keystroke per record, save to TSV, resume on crash. No framework. Just an HTML file.</div>
     </div>
     <div class="chrome bottom"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div><div class="bar c"></div></div>
   </section>
 
-  <!-- 16 COMMON PITFALLS -->
+  <!-- 15 TAKEAWAYS -->
   <section class="slide">
     <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div></div>
     <div class="body top-aligned">
-      <h2>Things that will go wrong</h2>
-      <div class="two-col" style="margin-top:8px;">
-        <ul class="small-li">
-          <li><span class="check">⚠️</span> <strong>Hallucinated field values</strong> — AI fills in something not in the document. Fix: always ask for null on missing fields; spot-check against originals.</li>
-          <li><span class="check">⚠️</span> <strong>Substring collisions</strong> — "rick" matches "Kirkpatrick." Fix: word-boundary regex.</li>
-          <li><span class="check">⚠️</span> <strong>Wrong page crop</strong> — you're looking at the top when the data is at the bottom. Fix: test crop sizes on samples.</li>
-        </ul>
-        <ul class="small-li">
-          <li><span class="check">⚠️</span> <strong>OCR misreads punctuation</strong> — <code>(Warren)</code> becomes <code>CWarren)</code>. Fix: don't require literal punctuation in patterns.</li>
-          <li><span class="check">⚠️</span> <strong>Memory-only processing</strong> — one crash and you restart from zero. Fix: write to disk incrementally; build resume support.</li>
-          <li><span class="check">⚠️</span> <strong>No ground-truth check</strong> — errors go undetected. Fix: always verify totals against an official source.</li>
-        </ul>
-      </div>
-    </div>
-    <div class="chrome bottom"><div class="bar a"></div><div class="bar b"></div></div>
-  </section>
-
-  <!-- 17 TAKEAWAYS -->
-  <section class="slide">
-    <div class="chrome top"><div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div></div>
-    <div class="body top-aligned">
-      <h2>Six things to remember</h2>
-      <ul class="small-li" style="margin-top:8px;">
-        <li><span class="check">1️⃣</span> <strong>Find the machine-readable layer first.</strong> Open your documents before writing any code. Page 3 of a TIFF might be clean text.</li>
-        <li><span class="check">2️⃣</span> <strong>Build a manifest early.</strong> One row per document, one column per thing you know. Never process the same file twice.</li>
-        <li><span class="check">3️⃣</span> <strong>Classify before you extract.</strong> Different document types need different extraction logic.</li>
-        <li><span class="check">4️⃣</span> <strong>Exceptions are a second dataset.</strong> Build a tool to review them — don't ignore them.</li>
-        <li><span class="check">5️⃣</span> <strong>Verify against something you already know.</strong> Official totals, published reports, anything.</li>
-        <li><span class="check">6️⃣</span> <strong>AI accelerates the coding, not the journalism.</strong> The judgment is still yours.</li>
+      <h2>What to take home</h2>
+      <ul>
+        <li><span class="ck">1️⃣</span> <strong>Find the machine-readable layer first.</strong> Open your documents before writing any code. The clean text may be hiding on page 3.</li>
+        <li><span class="ck">2️⃣</span> <strong>Define your schema before you extract.</strong> Know exactly what fields you want. Blank beats hallucinated.</li>
+        <li><span class="ck">3️⃣</span> <strong>Validate against something you already know.</strong> Official totals, published reports — catch errors before they're published mistakes.</li>
+        <li><span class="ck">4️⃣</span> <strong>Build the tool, not the spreadsheet.</strong> A searchable HTML viewer is more useful than 500 rows you can't navigate.</li>
+        <li><span class="ck">5️⃣</span> <strong>AI accelerates the coding, not the journalism.</strong> The judgment — what to look for, what it means, whether to trust it — is still yours.</li>
       </ul>
     </div>
     <div class="chrome bottom"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div></div>
   </section>
 
-  <!-- 18 QUESTIONS -->
+  <!-- 16 QUESTIONS -->
   <section class="slide">
     <div class="chrome top"><div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div><div class="bar c"></div></div>
     <div class="body">
@@ -685,7 +467,6 @@ unknown_file.pdf,    UNKNOWN,       2024-03-04,    manual,      can't classify
 <div class="hint">← → to navigate · F for fullscreen</div>
 
 <script>
-  // Scale to fill screen
   function fit() {
     const s = Math.min((window.innerWidth * 0.97) / 1280, (window.innerHeight * 0.97) / 720);
     document.documentElement.style.setProperty('--scale', s);
@@ -693,7 +474,6 @@ unknown_file.pdf,    UNKNOWN,       2024-03-04,    manual,      can't classify
   window.addEventListener('resize', fit);
   fit();
 
-  // Inject session URL footer on all slides except first and last
   const allSlides = Array.from(document.querySelectorAll('.slide'));
   allSlides.slice(1, -1).forEach(s => {
     const el = document.createElement('div');
@@ -712,17 +492,17 @@ unknown_file.pdf,    UNKNOWN,       2024-03-04,    manual,      can't classify
     document.getElementById('cur').textContent = i + 1;
   }
   document.addEventListener('keydown', e => {
-    if (['ArrowRight', ' ', 'PageDown'].includes(e.key)) { show(i + 1); e.preventDefault(); }
-    else if (['ArrowLeft', 'PageUp'].includes(e.key)) { show(i - 1); e.preventDefault(); }
-    else if (e.key === 'Home') show(0);
-    else if (e.key === 'End') show(allSlides.length - 1);
-    else if (e.key.toLowerCase() === 'f') {
+    if (['ArrowRight',' ','PageDown'].includes(e.key)) { show(i+1); e.preventDefault(); }
+    else if (['ArrowLeft','PageUp'].includes(e.key)) { show(i-1); e.preventDefault(); }
+    else if (e.key==='Home') show(0);
+    else if (e.key==='End') show(allSlides.length-1);
+    else if (e.key.toLowerCase()==='f') {
       if (!document.fullscreenElement) document.documentElement.requestFullscreen();
       else document.exitFullscreen();
     }
   });
   document.addEventListener('click', e => {
-    if (e.clientX > window.innerWidth / 2) show(i + 1); else show(i - 1);
+    if (e.clientX > window.innerWidth/2) show(i+1); else show(i-1);
   });
 </script>
 </body>
