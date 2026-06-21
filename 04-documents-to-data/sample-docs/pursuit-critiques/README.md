@@ -1,15 +1,70 @@
 # Sample Documents — GSP Pursuit Critiques
 
+**Session slides:** [bit.ly/ire-ai-2026](https://bit.ly/ire-ai-2026) → Session 4
+
 **Source:** Georgia State Patrol, Troop A — DPS-1114 pursuit critique forms, 2024
 **Request:** Open records request to Georgia Department of Public Safety
 
 Forty-six pursuit critiques from one troop in one year. Each is a completed DPS-1114 form — seven pages, consistent structure across all documents. A natural extraction project: known schema, repeating format, real investigative value.
+
+## Start here — three sample documents
 
 | File | Pages | Notes |
 |------|-------|-------|
 | [perry-234-critique.pdf](perry-234-critique.pdf) | 7 | TFC Perry #234, Post 38-Rome. PIT involved. Born-digital PDF. |
 | [cantrell-136-noeller-577-critique.pdf](cantrell-136-noeller-577-critique.pdf) | 7 | TFC Cantrell #136 + Tpr. Noeller #577, Post 43-Calhoun. Motorcycle pursuit, crash. Noeller received documented coaching for siren failure. Born-digital PDF. |
 | [kennemore-113-critique.pdf](kennemore-113-critique.pdf) | 7 | TPR Kennemore #113, Post 29-Paulding. First pursuit. Letter of Instruction issued for pursuing without siren. **Scanned PDF with OCR artifacts** — good for showing the limits of extraction. |
+
+## All 46 documents
+
+| File |
+|------|
+| [113-a-dps00170772 - 25113506.pdf](113-a-dps00170772%20-%2025113506.pdf) |
+| [113-pursuit-critique-4-11-2024 - 25073957.pdf](113-pursuit-critique-4-11-2024%20-%2025073957.pdf) |
+| [113-pursuit-critique-5-10-2024 - 25072821.pdf](113-pursuit-critique-5-10-2024%20-%2025072821.pdf) |
+| [117337-pursuit-w-pit-01242024 - 25073248.pdf](117337-pursuit-w-pit-01242024%20-%2025073248.pdf) |
+| [119-a-dps00163353 - 25113520.pdf](119-a-dps00163353%20-%2025113520.pdf) |
+| [119-a-dps00163789 - 25113521.pdf](119-a-dps00163789%20-%2025113521.pdf) |
+| [119-pursuit-critique-4-19-2024 - 25073789.pdf](119-pursuit-critique-4-19-2024%20-%2025073789.pdf) |
+| [119-pursuit-critique-4-30-2024 - 25072791.pdf](119-pursuit-critique-4-30-2024%20-%2025072791.pdf) |
+| [136-577-a-dps00151655 - 25113526.pdf](136-577-a-dps00151655%20-%2025113526.pdf) |
+| [136-601-a-dps00163805 - 25113527.pdf](136-601-a-dps00163805%20-%2025113527.pdf) |
+| [185-10-80-called-off-03242024 - 25074126.pdf](185-10-80-called-off-03242024%20-%2025074126.pdf) |
+| [234-pursuit-critique-1-18-2024 - 25074523.pdf](234-pursuit-critique-1-18-2024%20-%2025074523.pdf) |
+| [246-10-80-and-pit-03242024 - 25074174.pdf](246-10-80-and-pit-03242024%20-%2025074174.pdf) |
+| [302-pursuit-critique-2-1-2024 - 25073283.pdf](302-pursuit-critique-2-1-2024%20-%2025073283.pdf) |
+| [302-pursuit-critique-6-8-2024 - 25074076.pdf](302-pursuit-critique-6-8-2024%20-%2025074076.pdf) |
+| [325-202-pursuit-critique-3-8-2024 - 25074082.pdf](325-202-pursuit-critique-3-8-2024%20-%2025074082.pdf) |
+| [327-05112024 - 25072880.pdf](327-05112024%20-%2025072880.pdf) |
+| [327-09282023 - 25074327.pdf](327-09282023%20-%2025074327.pdf) |
+| [327-pursuit-critique-4-29-2024 - 25072703.pdf](327-pursuit-critique-4-29-2024%20-%2025072703.pdf) |
+| [422-05042024 - 25073303.pdf](422-05042024%20-%2025073303.pdf) |
+| [485-pursuit-critique-2-14-2024 - 25073144.pdf](485-pursuit-critique-2-14-2024%20-%2025073144.pdf) |
+| [485-pursuit-critique-2-15-2024 - 25073329.pdf](485-pursuit-critique-2-15-2024%20-%2025073329.pdf) |
+| [554-pursuit-critique-1-28-2024 - 25073346.pdf](554-pursuit-critique-1-28-2024%20-%2025073346.pdf) |
+| [556 A DPS00143102.pdf](556%20A%20DPS00143102.pdf) |
+| [565-556-pursuit-critique-3-30-2024 - 25073350.pdf](565-556-pursuit-critique-3-30-2024%20-%2025073350.pdf) |
+| [576-pursuit-critique-4-7-2024 - 25072992.pdf](576-pursuit-critique-4-7-2024%20-%2025072992.pdf) |
+| [601-200-302-754-pursuit-critique-6-8-2024 - 25073364.pdf](601-200-302-754-pursuit-critique-6-8-2024%20-%2025073364.pdf) |
+| [625-pursuit-critique-6-8-2024 - 25074631.pdf](625-pursuit-critique-6-8-2024%20-%2025074631.pdf) |
+| [746-982-683-pursuit-critique-5-10-2024 - 25073391.pdf](746-982-683-pursuit-critique-5-10-2024%20-%2025073391.pdf) |
+| [751-136-pursuit-critique-2-3-2024 - 25072983.pdf](751-136-pursuit-critique-2-3-2024%20-%2025072983.pdf) |
+| [875-pursuit-critique-1-22-2024 - 25072962.pdf](875-pursuit-critique-1-22-2024%20-%2025072962.pdf) |
+| [875-pursuit-critique-5-28-2024 - 25074151.pdf](875-pursuit-critique-5-28-2024%20-%2025074151.pdf) |
+| [982-pursuit-critique-3-28-2024 - 25072873.pdf](982-pursuit-critique-3-28-2024%20-%2025072873.pdf) |
+| [cantrell-136-noeller-577-critique.pdf](cantrell-136-noeller-577-critique.pdf) |
+| [cantrell-pursuit-pit-03042023 - 25073459.pdf](cantrell-pursuit-pit-03042023%20-%2025073459.pdf) |
+| [champion-01192024 - 25073460.pdf](champion-01192024%20-%2025073460.pdf) |
+| [champion-pursuit - 25072636.pdf](champion-pursuit%20-%2025072636.pdf) |
+| [cochran-06092024 - 25073461.pdf](cochran-06092024%20-%2025073461.pdf) |
+| [edwards-10292023-discontinue-pursuit - 25073878.pdf](edwards-10292023-discontinue-pursuit%20-%2025073878.pdf) |
+| [greene-and-peterson-02222024 - 25074046.pdf](greene-and-peterson-02222024%20-%2025074046.pdf) |
+| [kennemore-113-critique.pdf](kennemore-113-critique.pdf) |
+| [mason-01242024-pulled-over - 25074323.pdf](mason-01242024-pulled-over%20-%2025074323.pdf) |
+| [mason-pursuit-01142024 - 25074699.pdf](mason-pursuit-01142024%20-%2025074699.pdf) |
+| [perry-234-critique.pdf](perry-234-critique.pdf) |
+| [weaver-pursuit-04272024 - 25072659.pdf](weaver-pursuit-04272024%20-%2025072659.pdf) |
+| [wilson-03052024 - 25073827.pdf](wilson-03052024%20-%2025073827.pdf) |
 
 ---
 
