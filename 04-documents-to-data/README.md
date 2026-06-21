@@ -29,6 +29,14 @@ Agencies produce mountains of PDFs, scanned records, and semi-structured documen
 
 See [sample-docs/README.md](sample-docs/README.md) for tailored demo prompts for each document.
 
+**GSP Pursuit Critiques** — 46 DPS-1114 pursuit critique forms from Georgia State Patrol Troop A, 2024. Consistent schema, real investigative questions, mix of born-digital and scanned PDFs:
+
+- [perry-234-critique.pdf](sample-docs/pursuit-critiques/perry-234-critique.pdf) — born-digital, PIT involved
+- [cantrell-136-noeller-577-critique.pdf](sample-docs/pursuit-critiques/cantrell-136-noeller-577-critique.pdf) — born-digital, motorcycle pursuit, crash, documented coaching
+- [kennemore-113-critique.pdf](sample-docs/pursuit-critiques/kennemore-113-critique.pdf) — scanned PDF with OCR artifacts
+
+See [sample-docs/pursuit-critiques/](sample-docs/pursuit-critiques/) for the full set of 46 documents, extraction schema, and demo prompts.
+
 ## Materials
 
 - [slides/](slides/index.html) — session slide deck (open in any browser, arrow keys to navigate)
