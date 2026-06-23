@@ -27,146 +27,167 @@
     min-height: 100vh;
   }
 
-  /* ── Header ── */
-  header {
+  .hero {
     background: var(--ink);
     color: var(--cream);
-    padding: 48px 0 40px;
-    border-bottom: 4px solid var(--yellow);
+    padding: 0 0 0;
   }
-  .header-inner {
+  .hero-chrome {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 32px;
+    border-bottom: 2px solid #333;
+  }
+  .bar { height: 12px; border: 2px solid #444; border-radius: 20px; background: #2a2a2a; }
+  .bar.a { width: 100px; } .bar.b { flex: 1; } .bar.c { width: 160px; }
+  .dot { width: 26px; height: 12px; border: 2px solid #444; border-radius: 20px; flex-shrink: 0; }
+  .dot.blue { background: var(--blue); border-color: var(--blue); }
+  .dot.yellow { background: var(--yellow); border-color: var(--yellow); }
+  .dot.coral { background: var(--coral); border-color: var(--coral); }
+
+  .hero-inner {
     max-width: 860px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 44px 32px 48px;
   }
-  .conf-label {
+  .hero-eyebrow {
     font-size: 13px;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
     color: var(--yellow);
-    margin-bottom: 10px;
+    margin-bottom: 14px;
   }
-  header h1 {
+  .hero h1 {
     font-family: 'Playfair Display', Georgia, serif;
     font-weight: 900;
-    font-size: clamp(36px, 6vw, 58px);
-    line-height: 1.05;
-    letter-spacing: -1px;
-    margin-bottom: 16px;
+    font-size: clamp(40px, 7vw, 66px);
+    line-height: 1.0;
+    letter-spacing: -1.5px;
+    margin-bottom: 18px;
   }
-  header p {
+  .hero p {
     font-size: 18px;
-    color: #b0a898;
-    line-height: 1.5;
+    color: #a09484;
+    line-height: 1.55;
+    max-width: 560px;
   }
-  header a {
-    color: var(--yellow);
-    text-decoration: none;
-  }
-  header a:hover { text-decoration: underline; }
+  .hero strong { color: var(--cream); }
 
-  /* ── Main ── */
+  .hero-chrome-bottom {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 32px;
+    border-top: 2px solid #333;
+  }
+
   main {
     max-width: 860px;
     margin: 0 auto;
-    padding: 48px 24px 80px;
+    padding: 44px 24px 80px;
   }
 
   .section-label {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     text-transform: uppercase;
     color: #8a7f6e;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
   }
 
-  /* ── Session cards ── */
-  .sessions { display: flex; flex-direction: column; gap: 20px; margin-bottom: 56px; }
+  .sessions { display: flex; flex-direction: column; gap: 16px; margin-bottom: 52px; }
 
   .card {
     background: var(--cream);
-    border: 2px solid var(--ink);
-    border-radius: 16px;
-    padding: 28px 32px;
+    border: 2.5px solid var(--ink);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 4px 4px 0 var(--ink);
+    transition: transform 0.12s, box-shadow 0.12s;
+  }
+  .card:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink); }
+
+  .card-chrome {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 18px;
+    border-bottom: 2px solid var(--ink);
+    background: var(--cream-dark);
+  }
+  .card-chrome .bar { height: 9px; border: 1.5px solid var(--ink); background: var(--cream); }
+  .card-chrome .bar.a { width: 60px; } .card-chrome .bar.c { width: 100px; }
+  .card-chrome .dot { width: 18px; height: 9px; border: 1.5px solid var(--ink); }
+  .card-chrome .dot.blue { background: var(--blue); border-color: var(--blue); }
+  .card-chrome .dot.yellow { background: var(--yellow); border-color: var(--yellow); }
+  .card-chrome .dot.coral { background: var(--coral); border-color: var(--coral); }
+
+  .card-body {
+    padding: 22px 26px 22px;
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: 16px 32px;
+    gap: 12px 24px;
     align-items: start;
-    text-decoration: none;
-    color: inherit;
-    transition: box-shadow 0.15s, transform 0.15s;
-  }
-  .card:hover {
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-    transform: translateY(-2px);
   }
 
-  .card-left { grid-column: 1; }
-  .card-right {
-    grid-column: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 8px;
-    flex-shrink: 0;
-  }
+  .card-left { display: flex; gap: 14px; align-items: flex-start; }
+  .card-accent { width: 5px; border-radius: 4px; align-self: stretch; min-height: 56px; flex-shrink: 0; }
+  .card-text { flex: 1; }
 
   .card-meta {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     color: #7a6f5e;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
     display: flex;
-    gap: 10px;
+    gap: 12px;
     flex-wrap: wrap;
   }
-  .card-meta span { display: flex; align-items: center; gap: 4px; }
-
   .card h2 {
     font-family: 'Playfair Display', Georgia, serif;
     font-weight: 800;
-    font-size: 22px;
+    font-size: 20px;
     line-height: 1.2;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
-  .card p {
-    font-size: 15px;
-    color: #4a4035;
-    line-height: 1.55;
-  }
+  .card p { font-size: 14px; color: #4a4035; line-height: 1.6; }
 
-  .accent-bar {
-    height: 4px;
-    border-radius: 4px;
-    width: 48px;
-    margin-bottom: 12px;
+  .card-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 7px;
+    flex-shrink: 0;
   }
 
   .pill {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 6px 14px;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 13px;
     border-radius: 20px;
     border: 2px solid var(--ink);
     background: white;
     text-decoration: none;
     color: var(--ink);
     white-space: nowrap;
-    transition: background 0.12s;
+    transition: background 0.1s;
   }
   .pill:hover { background: var(--cream-dark); }
-  .pill.primary { background: var(--blue); color: white; border-color: var(--blue); }
-  .pill.primary:hover { background: #2d5ab8; border-color: #2d5ab8; }
+  .pill.blue { background: var(--blue); color: white; border-color: var(--blue); }
+  .pill.blue:hover { background: #2d5ab8; }
+  .pill.yellow { background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
+  .pill.yellow:hover { background: #d4a52e; }
 
   .done-badge {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
     color: var(--green);
     background: #f0faf2;
@@ -175,141 +196,177 @@
     padding: 3px 10px;
   }
 
-  /* ── About ── */
-  .about {
-    border-top: 2px solid var(--ink);
-    padding-top: 40px;
+  .dim { opacity: 0.6; }
+
+  .bottom-card {
+    background: var(--cream);
+    border: 2.5px solid var(--ink);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .bottom-chrome {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 18px;
+    border-bottom: 2px solid var(--ink);
+    background: var(--cream-dark);
+  }
+  .bottom-chrome .bar { height: 9px; border: 1.5px solid var(--ink); background: var(--cream); }
+  .bottom-chrome .bar.a { width: 60px; } .bottom-chrome .bar.c { width: 100px; }
+  .bottom-chrome .dot { width: 18px; height: 9px; border: 1.5px solid var(--ink); }
+  .bottom-chrome .dot.blue { background: var(--blue); border-color: var(--blue); }
+  .bottom-chrome .dot.yellow { background: var(--yellow); border-color: var(--yellow); }
+  .bottom-chrome .dot.coral { background: var(--coral); border-color: var(--coral); }
+  .bottom-body {
+    padding: 26px 30px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    gap: 28px;
   }
-  .about h3 {
+  .bottom-body h3 {
     font-family: 'Playfair Display', Georgia, serif;
     font-weight: 800;
-    font-size: 20px;
-    margin-bottom: 10px;
+    font-size: 18px;
+    margin-bottom: 9px;
   }
-  .about p {
-    font-size: 15px;
-    line-height: 1.6;
-    color: #3a3028;
-  }
-  .about a { color: var(--blue); text-decoration: none; }
-  .about a:hover { text-decoration: underline; }
+  .bottom-body p { font-size: 14px; line-height: 1.65; color: #3a3028; }
+  .bottom-body a { color: var(--blue); text-decoration: none; }
+  .bottom-body a:hover { text-decoration: underline; }
 
-  /* ── Footer ── */
-  footer {
-    text-align: center;
-    font-size: 13px;
-    color: #8a7f6e;
-    padding: 0 24px 40px;
-  }
+  footer { text-align: center; font-size: 12px; color: #8a7f6e; padding: 24px 24px 40px; }
+  footer a { color: #8a7f6e; }
 
-  @media (max-width: 600px) {
-    .card { grid-template-columns: 1fr; }
+  @media (max-width: 620px) {
+    .card-body { grid-template-columns: 1fr; }
     .card-right { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
-    .about { grid-template-columns: 1fr; }
+    .bottom-body { grid-template-columns: 1fr; }
+    .hero-inner { padding: 36px 20px 40px; }
+    .hero-chrome, .hero-chrome-bottom { padding: 14px 20px; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="header-inner">
-    <div class="conf-label">IRE 2026 · National Harbor, Maryland</div>
-    <h1>Charles Minshew</h1>
-    <p>Senior Editor for Data Journalism, <strong>The Atlanta Journal-Constitution</strong><br>
-    Slides, tipsheets, and sample files for all four sessions.</p>
+<div class="hero">
+  <div class="hero-chrome">
+    <div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div><div class="bar c"></div>
   </div>
-</header>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">IRE 2026 · National Harbor, Maryland</div>
+    <h1>Charles Minshew</h1>
+    <p>Senior Editor for Data Journalism, <strong>The Atlanta Journal-Constitution</strong>. Slides, tipsheets, and sample files for all four sessions.</p>
+  </div>
+  <div class="hero-chrome-bottom">
+    <div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div>
+  </div>
+</div>
 
 <main>
   <div class="section-label">Sessions</div>
   <div class="sessions">
 
-    <!-- Session 1 -->
     <div class="card">
-      <div class="card-left">
-        <div class="accent-bar" style="background:var(--coral);"></div>
-        <div class="card-meta">
-          <span>📅 Friday, 2:45 p.m.</span>
-          <span>📍 Maryland 3</span>
-        </div>
-        <h2>Coaching AI Tools for Investigative Reporting</h2>
-        <p>FOIA requests, data dictionaries, reporting plans, spreadsheet formulas — a hands-on session for reporters who want to use AI on real beat work.</p>
+      <div class="card-chrome">
+        <div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div><div class="bar c"></div>
       </div>
-      <div class="card-right">
-        <span class="done-badge">✓ Complete</span>
-        <a href="01-coaching-ai/slides/index.html" class="pill primary">▶ Slides</a>
-        <a href="01-coaching-ai/" class="pill">Tipsheet &amp; materials</a>
+      <div class="card-body">
+        <div class="card-left">
+          <div class="card-accent" style="background:var(--coral);"></div>
+          <div class="card-text">
+            <div class="card-meta"><span>📅 Friday, 2:45 p.m.</span><span>📍 Maryland 3</span></div>
+            <h2>Coaching AI Tools for Investigative Reporting</h2>
+            <p>FOIA requests, data dictionaries, reporting plans, spreadsheet formulas — hands-on for reporters who want to use AI on real beat work.</p>
+          </div>
+        </div>
+        <div class="card-right">
+          <span class="done-badge">✓ Complete</span>
+          <a href="01-coaching-ai/slides/index.html" class="pill blue">▶ Slides</a>
+          <a href="01-coaching-ai/" class="pill">Tipsheet &amp; materials</a>
+        </div>
       </div>
     </div>
 
-    <!-- Session 2 -->
     <div class="card">
-      <div class="card-left">
-        <div class="accent-bar" style="background:var(--blue);"></div>
-        <div class="card-meta">
-          <span>📅 Saturday, 10:15 a.m.</span>
-          <span>📍 Maryland 1-2</span>
-        </div>
-        <h2>Your AI Research Assistant: A Live Demo</h2>
-        <p>Pulling data off web pages, turning PDFs into spreadsheets, comparing documents, cleaning names and addresses, and building a local browse tool — all with AI.</p>
+      <div class="card-chrome">
+        <div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div><div class="bar c"></div>
       </div>
-      <div class="card-right">
-        <span class="done-badge">✓ Complete</span>
-        <a href="02-ai-research-assistant/slides/index.html" class="pill primary">▶ Slides</a>
-        <a href="02-ai-research-assistant/" class="pill">Tipsheet &amp; materials</a>
-        <a href="https://download-directory.github.io/?url=https://github.com/charlesminshew/ire26/tree/main/02-ai-research-assistant/samples" class="pill">⬇ Sample files</a>
+      <div class="card-body">
+        <div class="card-left">
+          <div class="card-accent" style="background:var(--blue);"></div>
+          <div class="card-text">
+            <div class="card-meta"><span>📅 Saturday, 10:15 a.m.</span><span>📍 Maryland 1-2</span></div>
+            <h2>Your AI Research Assistant: A Live Demo</h2>
+            <p>Pulling data off web pages, turning PDFs into spreadsheets, comparing documents, cleaning names and addresses, and building a local browse tool.</p>
+          </div>
+        </div>
+        <div class="card-right">
+          <span class="done-badge">✓ Complete</span>
+          <a href="02-ai-research-assistant/slides/index.html" class="pill blue">▶ Slides</a>
+          <a href="02-ai-research-assistant/" class="pill">Tipsheet &amp; materials</a>
+          <a href="https://download-directory.github.io/?url=https://github.com/charlesminshew/ire26/tree/main/02-ai-research-assistant/samples" class="pill">⬇ Sample files</a>
+        </div>
       </div>
     </div>
 
-    <!-- Session 3 -->
-    <div class="card" style="opacity:0.7;">
-      <div class="card-left">
-        <div class="accent-bar" style="background:var(--green);"></div>
-        <div class="card-meta">
-          <span>📅 Saturday, 2:30 p.m.</span>
-          <span>📍 Maryland 5-6</span>
-        </div>
-        <h2>Master the Power of Mapping with QGIS</h2>
-        <p>With Jennifer LaFleur. A hands-on introduction to QGIS for journalists who want to make maps without proprietary software.</p>
+    <div class="card dim">
+      <div class="card-chrome">
+        <div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div><div class="bar c"></div>
       </div>
-      <div class="card-right">
-        <a href="03-qgis-mapping/" class="pill">Materials</a>
+      <div class="card-body">
+        <div class="card-left">
+          <div class="card-accent" style="background:var(--green);"></div>
+          <div class="card-text">
+            <div class="card-meta"><span>📅 Saturday, 2:30 p.m.</span><span>📍 Maryland 5-6</span></div>
+            <h2>Master the Power of Mapping with QGIS</h2>
+            <p>With Jennifer LaFleur. A hands-on introduction to QGIS for journalists who want to make maps without proprietary software.</p>
+          </div>
+        </div>
+        <div class="card-right">
+          <a href="03-qgis-mapping/" class="pill">Materials</a>
+        </div>
       </div>
     </div>
 
-    <!-- Session 4 -->
     <div class="card">
-      <div class="card-left">
-        <div class="accent-bar" style="background:var(--yellow);"></div>
-        <div class="card-meta">
-          <span>📅 Sunday, 10:15 a.m.</span>
-          <span>📍 Maryland 1-2</span>
-        </div>
-        <h2>Turning Documents into Data with AI</h2>
-        <p>Read &amp; triage PDFs with AI, extract structured data locally with PDFplumber, and vibecode a browse tool — using 46 real GSP pursuit critique forms as the exercise.</p>
+      <div class="card-chrome">
+        <div class="bar a"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar b"></div><div class="bar c"></div>
       </div>
-      <div class="card-right">
-        <a href="04-documents-to-data/slides/index.html" class="pill primary">▶ Slides</a>
-        <a href="04-documents-to-data/" class="pill">Tipsheet &amp; materials</a>
-        <a href="04-documents-to-data/sample-docs/" class="pill">📄 Sample docs</a>
-        <a href="04-documents-to-data/sample-docs/pursuit-critiques/" class="pill">🚔 Pursuit critiques</a>
+      <div class="card-body">
+        <div class="card-left">
+          <div class="card-accent" style="background:var(--yellow);"></div>
+          <div class="card-text">
+            <div class="card-meta"><span>📅 Sunday, 10:15 a.m.</span><span>📍 Maryland 1-2</span></div>
+            <h2>Turning Documents into Data with AI</h2>
+            <p>Read &amp; triage PDFs with AI, extract structured data locally with PDFplumber, and vibecode a browse tool — using 46 real GSP pursuit critique forms.</p>
+          </div>
+        </div>
+        <div class="card-right">
+          <a href="04-documents-to-data/slides/index.html" class="pill yellow">▶ Slides</a>
+          <a href="04-documents-to-data/" class="pill">Tipsheet &amp; materials</a>
+          <a href="04-documents-to-data/sample-docs/" class="pill">📄 Sample docs</a>
+          <a href="04-documents-to-data/sample-docs/pursuit-critiques/" class="pill">🚔 Pursuit critiques</a>
+        </div>
       </div>
     </div>
 
   </div>
 
-  <div class="about">
-    <div>
-      <h3>About</h3>
-      <p>I'm a senior editor for data journalism at <strong>The Atlanta Journal-Constitution</strong>, where I lead the newsroom's data team. I build internal tools, manage data infrastructure, and support investigative reporting with data.</p>
-      <p style="margin-top:10px;">Find me at the conference or reach me at <a href="mailto:charles.minshew@ajc.com">charles.minshew@ajc.com</a>.</p>
+  <div class="bottom-card">
+    <div class="bottom-chrome">
+      <div class="bar a"></div><div class="bar b"></div><div class="dot blue"></div><div class="dot yellow"></div><div class="dot coral"></div><div class="bar c"></div>
     </div>
-    <div>
-      <h3>License</h3>
-      <p>These materials are shared under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Use them, share them, adapt them — just give credit.</p>
+    <div class="bottom-body">
+      <div>
+        <h3>About</h3>
+        <p>I'm a senior editor for data journalism at <strong>The Atlanta Journal-Constitution</strong>, where I lead the newsroom's data team. I build internal tools, manage data infrastructure, and support investigative reporting with data.</p>
+        <p style="margin-top:10px;">Find me at the conference or reach me at <a href="mailto:charles.minshew@ajc.com">charles.minshew@ajc.com</a>.</p>
+      </div>
+      <div>
+        <h3>License</h3>
+        <p>These materials are shared under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Use them, share them, adapt them — just give credit.</p>
+      </div>
     </div>
   </div>
 </main>
